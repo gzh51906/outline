@@ -5,14 +5,21 @@
     * css
     * js
     * ...
+
+
+    * 为什要用静态资源服务器
+        * PHP: PHP+Apache+mySQL
+        * NodeJS: node+Mongo
+        * java: java+tomcat+oracle
+        * dotNet: .netAsp+IIS+SQLServer
  */
 // 内置模块（nodejs自带的模块，直接使用）
  const http = require('http');// commonJS同步
 
- // 用于读取文件
+// 用于读取文件
  const fs = require('fs');
 
- // 引入url模块，用于url地址格式化
+// 引入url模块，用于url地址格式化
 let url = require('url');
 
 // 用于格式化文件地址
@@ -33,14 +40,16 @@ const app = http.createServer((req,res)=>{
     // fs.readFile('./index.html',(err,content)=>{
     //     // err:错误信息，默认：null
 
-    //     res.write(content);
+    //     res.write(content);//{username:'laoxie',age:18}
 
     //     //结束响应
     //     res.end();
     // })
 
     // 静态资源服务器：根据不同的请求，返回不同的内容
-    let reqObj = url.parse(req.url,true);
+    // /index.html?username=laoxie&password=123
+    // let reqObj = url.parse(req.url);//{pathname:'/index.html',query:'username=laoxie&password=123'}
+    let reqObj = url.parse(req.url,true);//{pathname:'/index.html',query:{username:'laoxie',password:123}}
 
     // 得到地址格式：/img/jingjing.jpg
     let filePath = reqObj.pathname;
@@ -56,10 +65,11 @@ const app = http.createServer((req,res)=>{
 
     fs.readFile(realPath,(err,content)=>{
         // err:错误信息，默认：null
-        console.log(err,content)
+        // content:文件内容Buffer（二进制文件内容）
+        // console.log('content:',content)
 
         // 告诉浏览器内容类型是什么（响应头Content-Type）
-        res.writeHead(200,{'content-type':mime[extname] + ';charset=utf8'});
+        res.writeHead(200,{'Content-Type':mime[extname] + ';charset=utf8'});
 
         res.write(content);
 

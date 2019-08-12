@@ -1,4 +1,9 @@
+// 在模块化开发中，文件的作用域都是独立的，外部文件无法访问username
+// 除非把username暴露出去
+// var username = 'xxx'
+
 module.exports = {
+  // "username":username,
   "css": "text/css",
   "gif": "image/gif",
   "html": "text/html",

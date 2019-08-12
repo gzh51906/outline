@@ -10,5 +10,13 @@
 <body>
     <h1>静态资源服务器</h1>
     <img src="img/jingjing.png"/>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            console.log(xhr.responseText);
+        }
+        xhr.open('post','http://localhost:1906/reg',true);
+        xhr.send()
+    </script>
 </body>
 </html>
