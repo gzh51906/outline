@@ -84,3 +84,120 @@
             * 第三方中间件: 需要安装
 * postman
     * chrome浏览器插件
+
+## day1-2
+
+### 面试题
+> 每个上来面试的同学要把问题记录下来，并发到群里
+格式：
+```
+#面试题#
+1. 原型链的理解
+    答案...
+2. 作用域的理解
+3. ES6有哪些新特性
+4. var,let,const的异同
+```
+* 原型链的理解
+    * 当前对象到Object.prototype间的链条
+    * 属性访问规则
+* 作用域的理解
+    * 全局作用域
+    * 局部作用域
+    * 块级作用域 {let,const}
+    * 变量查找规则：就近原则
+        * 从当前作用域开始查找，找到则返回
+        * 继续往级作用域查找，找到则返回
+        * ....
+        * 直到全局作用域，如还是无法找到变量则报:xxx is not define
+    ```js
+        let username = 'laoxie'
+        window.onload = function(){
+            let username = 'jingjing'
+
+            btn.onclick = function(){
+                // var username
+                console.log(username);
+                //var username = 'dingding'
+            }
+        }
+
+        // 块级作用域
+        // var i
+        for(let i=0;i<5;i++){
+            // let i
+        }
+        console.log(i);//5,not defined
+
+        {
+            let username = 'jingjing'
+        }
+        console.log(username)
+
+    ```
+* ES6有哪些新特性
+* var,let,const的异同
+
+### 复习
+* NodeJS
+    * 静态资源服务器
+    * 服务器的知识
+        * 客户端
+        * 服务端
+        * request
+            * 请求头
+            * 请求体
+            * 参数
+        * response
+            * 响应头
+    * 模块化开发
+        * commonJS      Nodejs          同步
+        * AMD           Requirejs       异步（预加载）
+        * CMD           seajs           异步（延迟加载）
+    * NodeJS模块
+        * 内置模块
+        * 自定义模块
+            * 引入必须使用相对路径
+            * 一个文件一个模块
+            * 导出
+                * module.exports = {}
+                * exports.xxx = xxx
+        * 第三方模块
+            * 必须安装
+            * 引入与原生模块一致
+        * 文件模块
+            * json文件
+    * express
+        * 利用express实现静态资源服务器
+        * 中间件middleware
+            * 内置中间件
+                * express.static()
+                * express.json()
+                * express.urlencoded({extended:false})
+            * 自定义中间件
+                * 中间件就是一个函数
+                * 参数
+                    * request
+                    * response
+                    * next
+            * 第三方中间件
+        * 使用中间件
+            * `app.use([path],middlewares)`
+
+### 知识点
+* 请求类型
+    * get           查
+    * post          增
+    * patch/put     改（patch：部分修改，put：全部修改）
+    * delete        删
+    * options       预请求（一般出现在跨域请求中，由浏览器自动发起）
+* 编写数据接口
+    * RESTful：编写数据接口的标准
+        * 根据**请求类型**来设计不同的数据接口
+        * 根据**请求路径**来设计不同的数据接口
+* 路由
+    * 动态路由：路径带变量
+        * 获取动态路由参数：req.params
+    * get请求获取参数(参数放在url中)：req.query
+    * post,put,patch(参数放在请求体中)：req.body
+        * 注意：默认express没有把请求体中的数据格式化到req.body中，需要利用中间件实现格式化
