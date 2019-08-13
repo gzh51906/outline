@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP</title>
+    <script>
+        window.onload = function () {
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>跨域请求之JSONP</h1>
+
+    <script>
+        // 定义全局函数
+        function getData(data) {
+            console.log(data)
+        }
+
+        // 创建script标签并发起jsonp请求
+        let script = document.createElement('script');
+        script.src = 'http://localhost:1906/jsonp?callback=getData';
+
+        // 把script标签插入body
+        document.body.appendChild(script);
+    </script>
+</body>
+
+</html>
