@@ -245,6 +245,8 @@
     * 应用场景
         * 事件委托
 * 对象的复制
+    // {a:10,b:20,c:30,score:{en:123,math:100,cn:150}}
+    {a:10,b:20,c:30,score:#xxx}
     * 浅拷贝
         * 遍历
         * Object.assign({},obj)
@@ -256,6 +258,41 @@
                 let obj = {username:"jingjing",say:function(){}}
             ```
         * 第三工具
+* get和post的区别
+    * 语义不一样
+    * 参数传递方式不一样
+    * 发送数据大小限制不一样
+    * 后端接收方式不一样
+    * ...
+* git常用命令
+    * git add
+    * git commit
+    * git push
+    * git pull
+    * git status
+    * git init
+    * git clone
+    * git log
+    * git reflog
+    * git remote
+    * git reset
+    * .....
+* 原生js对节点的操作
+    * 创建：document.createElement()
+    * 插入：xxx.appendChild(xx)
+    * 删除：parent.removeChild(xxx)
+    * 改
+        * xx.innerHTML
+        * xx.innerText
+        * xx.setAttribute()
+    * 获取
+        * document.getElementById()
+        * document.getElementsByClassName()
+        * document.getElementsByTagName()
+        * document.querySelector()
+        * document.querySelectorAll()
+
+
 ### 复习
 * 路由
     * 模块化
@@ -291,5 +328,6 @@
             * options：预请求（一般出现在复杂跨域请求中，由浏览器自动发起，用于确认服务器是否支持这个请求）
     * 服务器代理
         > 目标服务器有接口，但不允许跨域访问
+        * http-proxy-middleware
     * 爬虫
         > 服务器没接口，但又想使用它的数据 -> 爬虫

@@ -41,7 +41,47 @@ Router.get('/jsonp',(req,res)=>{
 Router.use('/cors',corsRouter);
 
 // 服务器代理
-Router.get('/proxy',proxyRouter)
+// 地址以/proxty开头的请求，进入代理服务器
+Router.use('/proxy',proxyRouter);
+// var proxy = require('http-proxy-middleware');
+// let weiboMiddleware = proxy({ 
+//     // 要代理的目标服务器
+//     target: 'http://52.198.113.252', 
+//     changeOrigin: true,
+//     pathRewrite: {
+//         '^/proxy': '/', // 删除路径中多余的字符
+//     },
+// })
+// Router.get('/proxy/*',weiboMiddleware)
+
+// 爬虫
+const request = require('request');
+const cheerio = require('cheerio');
+Router.get('/spider',(req,res)=>{
+    request('http://search.lefeng.com/search/showresult?keyword=%E9%9D%A2%E8%86%9C', (error, response, body) => {
+
+
+        let $ = cheerio.load(body);
+        let goodslist = [];
+        $('#smPruArea .pruwrap').each((i, e)=>{
+            let $ele = $(e)
+            let name = $ele.find('.nam').text();
+            let imgurl = $ele.find('dt img').attr('src');
+            let oldPrice = $ele.find('.spri').text()
+            let price = $ele.find('.price').text()
+            let goods = {
+                name,
+                imgurl,
+                oldPrice,
+                price
+            }
+
+            goodslist.push(goods)
+            
+        })
+        res.send(goodslist)
+    });
+})
 
 
 
