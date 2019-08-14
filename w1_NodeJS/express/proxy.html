@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跨域请求之服务器代理</title>
+</head>
+<body>
+    <h1>跨域请求之服务器代理</h1>
+    <script>
+        let xhr = new XMLHttpRequest();
+        // xhr.open('get','https://weibo.com/aj/v6/comment/big?ajwvr=6&id=4404402175452970&from=singleWeiBo&__rnd=1565752680156',true);
+        xhr.open('get','http://localhost:1906/proxy/weibo/aj/v6/comment/big?ajwvr=6&id=4404402175452970&from=singleWeiBo&__rnd=1565752680156',true)
+        xhr.send()
+        // xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+        // xhr.send(`ids=713,597,592,93,537,599,600,601,478,37,482,38,413,263,483,43,423,438,443,451,376,267,254,54,51,50,365,55,57,759,58,59,,60,61,766,152,145,400,405,149,402,404,403,408,401,235,409,80,223,121,122,125,274,123,124,126,128,129,130,131,132,81,760,157,416,447,381,158,418,481,439,159,299,450,277,82,225,385,386,387,389,384,390,167,391,170,171,163,173,83,78,175,392,394,395,396,180,181,182,183,184,185,186,84,227,187,190,191,192,188,189,193,397,195,196,197,198`);
+    </script>
+</body>
+</html>

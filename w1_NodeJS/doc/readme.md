@@ -230,3 +230,66 @@
                     * 后端
                         * 接收回调函数名
                         * 返回js代码（回调函数执行的代码）
+            * CORS（Cross Origin Resource Sharing）
+                
+## day1-3
+
+### 面试题
+* 未知宽高的图片居中
+    * 兼容ie6:利用js获取宽高，动态设置top,left
+* 事件传播的理解
+    * 事件冒泡
+    * 事件捕获
+    * 事件源对象（e.target）
+    * 阻止事件传播：e.stopPropagation()
+    * 应用场景
+        * 事件委托
+* 对象的复制
+    * 浅拷贝
+        * 遍历
+        * Object.assign({},obj)
+        * {...obj}
+    * 深拷贝
+        * 递归
+        * JSON.parse(JSON.stringify())
+            ```js
+                let obj = {username:"jingjing",say:function(){}}
+            ```
+        * 第三工具
+### 复习
+* 路由
+    * 模块化
+    * 中间件
+    * RESTful规范
+        * 请求类型
+            * get
+            * post
+            * patch/put
+            * delete
+            * options
+        * 请求路径
+            * post      /goods          增加一个商品
+            * get       /goods          获取所有商品
+            * get       /goods/11       获取一个商品
+            * patch     /goods/11       修改一个商品
+            * delete    /goods/11       删除一个商品
+* 跨域
+    * jsonp
+        * 缺点：
+            * 只能get请求
+            * 不是一个ajax请求
+    * CORS
+        * 原理：就是一个普通的ajax请求，通过响应头来实现跨域数据请求
+        * 必要条件
+            * 浏览器支持
+            * 服务器支持
+                * 在服务端设置响应头
+                    * Access-Control-Allow-Origin:'*'
+                    * Access-Control-Allow-Headers:'Content-Type'
+                    * Access-Control-Allow-Methods:'get,post,put,patch,delete'
+        * 复杂请求与简单请求
+            * options：预请求（一般出现在复杂跨域请求中，由浏览器自动发起，用于确认服务器是否支持这个请求）
+    * 服务器代理
+        > 目标服务器有接口，但不允许跨域访问
+    * 爬虫
+        > 服务器没接口，但又想使用它的数据 -> 爬虫
