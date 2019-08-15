@@ -331,3 +331,90 @@
         * http-proxy-middleware
     * 爬虫
         > 服务器没接口，但又想使用它的数据 -> 爬虫
+
+
+* 页面渲染方式
+    * BSR：前后端分离（数据与结构分离：BSR客户端渲染）
+        * 前端：请求接口，并渲染数据到页面
+        * 后端：编写数据接口
+    * SSR：html结构与数据混写（SSR服务器渲染）
+        * 速度
+        * SEO
+
+## day1-4
+
+### 面试题
+* json字符串的格式要求
+    * 字符串与属性名必须使用双引号
+    * 不能有注释
+    * 不用有多余的逗号
+    * 值必须为以下类型
+        * String
+        * Number
+        * Boolean
+        * Object
+        * Array
+        * null
+    * 常用方法
+        * JSON.stringify()
+        * JSON.parse()
+* 类数组与数组的区别
+    * 类数组的原型对象与数组不同，所以不能使用数组的方法
+    * 类数组如何使用数组的方法
+        ```js
+            Array.prototype.map.call(jiaArray,function(item,idx,arr){})
+
+            arr.map(function(){})
+        ```
+* cookie、webStorage、session的区别
+    * 应用场景
+    * cookie格式：name=value;expires=xxx;path=/html/img;domain=xxx
+* HTML5新特性
+    * 新标签
+    * 新表单类型
+    * Audio,Video,Canvas
+    * Svg
+    * WebStorage
+        * sessionStorage
+        * localStorage
+    * Draggable
+    * History
+    * FormData
+    * ......
+
+### 复习
+* 跨域
+    * jsonp
+    * CORS
+    * 代理服务器
+* 上线流程
+* 爬虫
+    * request
+    * cheerio
+
+### 知识点
+* 读取文件
+    * 小文件（一次性读取完毕）
+        * fs.readFile(path)
+    * 大文件(必须一点一点读取，文件流stream)
+        * fs.createReadStream()
+* 写入
+    * 小文件（一次性写入）
+        * fs.writeFile(path,data)
+    * 大文件（Stream）
+        * fs.createWriteStream(path)
+        * 写入的文件可以使用以下方式
+            * 管道传输pipe
+            * writerStream.write(data,'UTF8');
+            * writerStream.end();
+
+    ```js
+        gulp.task('compileJS',()=>{
+            gulp.src('./src/js/*.js')       //得到文件流
+
+            .pipe(concat())
+            .pipe(uglify())
+            .piep(gulp.dest('./dist/js'))
+        })
+    ```
+

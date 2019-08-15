@@ -57,6 +57,8 @@ Router.use('/proxy',proxyRouter);
 // 爬虫
 const request = require('request');
 const cheerio = require('cheerio');
+const path = require('path');
+const fs = require('fs');
 Router.get('/spider',(req,res)=>{
     request('http://search.lefeng.com/search/showresult?keyword=%E9%9D%A2%E8%86%9C', (error, response, body) => {
 
@@ -69,9 +71,28 @@ Router.get('/spider',(req,res)=>{
             let imgurl = $ele.find('dt img').attr('src');
             let oldPrice = $ele.find('.spri').text()
             let price = $ele.find('.price').text()
+
+            // 获取文件名
+            let filename = path.basename(imgurl);
+
+            // 爬取图片
+            // request方法返回一个stream
+            request(imgurl).pipe(fs.createWriteStream('./img/'+filename));
+
+            // var readerStream = fs.createReadStream('bigfile.avi');
+
+            // let data = '';
+            // readerStream.on('data',(chunk)=>{
+            //     // 每读取一段文件执行一次data事件
+            //     data += chunk;
+            // })
+            // readerStream.on('end',function(){
+            //     // 文件读取完成执行end事件
+            // });
+
             let goods = {
                 name,
-                imgurl,
+                imgurl:'img/'+filename,
                 oldPrice,
                 price
             }
@@ -79,6 +100,9 @@ Router.get('/spider',(req,res)=>{
             goodslist.push(goods)
             
         })
+
+        // 操作数据库
+        // mySQL在Nodejs中的操作
         res.send(goodslist)
     });
 })
