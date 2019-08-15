@@ -381,6 +381,17 @@
     * History
     * FormData
     * ......
+* getElementsByTagName('button')和querySelectAll('button')的到结果的区别
+    * HTMLCollection（实时更新）
+    * NodeList
+* ajax的完整步骤
+    1. let xhr = new XMLHttpRequest();
+    4. xhr.onload = ()=>{}
+    2. xhr.open('get','',true);
+    3. xhr.send()
+* 箭头函数与普通函数的区别
+    * 箭头函数是否可实例化（不可以）
+
 
 ### 复习
 * 跨域
@@ -417,4 +428,8 @@
             .piep(gulp.dest('./dist/js'))
         })
     ```
-
+* 环境变量
+    * 我的电脑（右键）-> 属性-> 高级设置 -> 环境变量
+        * 用户变量
+        * 系统变量
+* mySQL
