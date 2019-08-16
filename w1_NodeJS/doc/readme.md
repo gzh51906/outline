@@ -475,6 +475,15 @@
             * Array
             * Function
             * ...
+* 前后端如何协调
+    * 模拟数据json-server
+* 怎么理解Express
+    * 中间件
+* 错误处理步骤
+    * console.log()
+    * 断点
+    * debugger
+
 ### 复习
 * Stream
     * 属于fs模块的范畴
@@ -507,3 +516,23 @@
 ### 知识点
 * 规范后端返回的数据格式
     * 封装的扩展性与合理性
+* async & await
+
+* 数据库
+    * 关系型数据库
+        * Oracle
+        * SQLServer
+        * mySQL
+        * mariaDB
+    * 非关系型数据
+        * MongoDB
+    * 对比
+                关系型数据              非关系型数据
+    数据库       database                database
+    表           table                   collection
+    数据         row                     document
+
+* 在NodeJS中使用mongodb
+    * mongodb
+    * mongoose
+    * 文档操作CRUD

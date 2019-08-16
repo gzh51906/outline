@@ -12,12 +12,9 @@ var pool  = mysql.createPool({
 
 // 回调函数
 // module.exports = function(sql,callback){
-    
 //     pool.query(sql, function(error, rows){
-
 //         callback(rows)
 //     });
-
 // }
 
 module.exports = sql=>{
