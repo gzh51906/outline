@@ -20,14 +20,13 @@ var pool  = mysql.createPool({
 
 // }
 
-module.exports = function(sql){
+module.exports = sql=>{
     return new Promise((resolve,reject)=>{
-        pool.query(sql, function(error, rows){
+        pool.query(sql, (error, rows)=>{
             if(error){
-                reject(error)
+                reject(error);
             }
             resolve(rows);
         });
-
     })
 }

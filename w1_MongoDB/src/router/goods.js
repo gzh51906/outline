@@ -4,6 +4,8 @@ const Router = express.Router();
 
 const mysql = require('../db/mysql');
 
+const {formatData} = require('../utils');
+
 // const mysql = require('mysql');
 // 连接数据库
 
@@ -41,6 +43,10 @@ Router.post('/',(req,res)=>{
     // });
 
     mysql(`insert into goods(name,price,color,size,imgurl,category) values('${name}','${price}','${color}','${size}','${imgurl}','${category}')`)
+    .then(result=>{
+        res.send(formatData())
+    })
+    
 });
 
 Router.route('/:id')
@@ -54,7 +60,9 @@ Router.route('/:id')
     //     console.log('删除商品');
     //     res.send(rows);
     // });
-    mysql(`delete from goods where id=${id}`)
+    mysql(`delete from goods where id=${id}`).then(result=>{
+        res.send(formatData())
+    })
 })
 
 .patch((req,res)=>{
@@ -69,10 +77,12 @@ Router.route('/:id')
     //     console.log('修改商品');
     //     res.send(rows);
     // });
-    mysql(`update goods set price=${price} where id=${id}`)
+    mysql(`update goods set price=${price} where id=${id}`).then(result=>{
+        res.send(formatData())
+    })
 })
 
-.get((req,res)=>{
+.get(async (req,res)=>{
     // 动态路由参数：req.params
     let {id} = req.params
     // 数据库操作
@@ -102,10 +112,27 @@ Router.route('/:id')
     // })
 
     // Promise -> async await（ES7）
-    mysql(`select * from goods where id=${id}`).then((data)=>{
-        res.send(data);
-    })
-    
+    // mysql(`select * from goods where id=${id}`).then((data)=>{
+    //     res.send(formatData({data}))
+    // }).catch(err=>{
+    //     res.send(formatData({code:0,data:err})) 
+    // })
+
+    // await：等待promise对象resolve返回值
+    // await限制条件：不能单独使用，必须写在async函数中
+    // try{}..catch(err){}
+    let result;
+    try{
+        // 尝试这里这里的代码
+        // 如果执行成功，则忽略catch中的代码，
+        // 如果有错误，则执行catch代码（不会停止js的执行）
+        let data = await mysql(`select * from goods where id=${id}`)
+        result = formatData({data});
+    }catch(err){
+        result = formatData({code:0,data:err})
+    }
+
+    res.send(result)
 });
 
 

@@ -433,3 +433,77 @@
         * 用户变量
         * 系统变量
 * mySQL
+
+## day1-5
+
+### 面试题
+* 对模块化开发的理解
+    * 前端
+        * AMD   requireJS
+        * CMD   seaJS
+        * ESModule
+    * 后端
+        * commonjs  NodeJS
+    * 模块化开发的好处
+        * 结构更清晰
+        * 开发更便利
+        * 维护更方便
+        * ......
+    * 搭架子（准备工作）
+* 是否了解SEO
+    * 搜索引擎优化
+    * 搜索引擎就是一个最大的爬虫
+    * 让自己的网站适应搜索引擎爬虫的算法，让网站对搜索引擎更友好
+    * h5如何做SEO
+        * 标签语义化
+        * 结构更清晰
+        * 布局更合理
+        * 关键字排布更合理
+        * SSR
+* JS有那么些数据类型
+    * JS数据类型判断
+        * typeof
+        * Object.prototype.toString()
+    * 类型
+        * Number
+        * String
+        * Boolean
+        * Null
+        * Undefined
+        * Symbol
+        * Object
+            * Array
+            * Function
+            * ...
+### 复习
+* Stream
+    * 属于fs模块的范畴
+    * 读取
+        fs.createReadStream()
+        * 事件
+            * data
+            * end
+            * error
+    * 写入
+        * myStream = fs.createWriteStream()
+        * 写入内容
+            * myStream.write()  可执行多次
+            * .pipe(myStream)
+            * myStream.end()    
+
+* mySQL
+    * mysql第三方模块
+    * 连接数据库
+        * 连接对象
+        * 连接池（推荐）
+    * 数据库操作
+        * 增
+        * 删
+        * 改
+        * 查
+    * 封装方法
+        * promise对象
+
+### 知识点
+* 规范后端返回的数据格式
+    * 封装的扩展性与合理性
