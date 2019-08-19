@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5d5667d8f174c9ca8ea897d8"},"username":"laoxie","password":"123456","gender":"男","age":17}
+{"_id":{"$oid":"5d5676baf174c9ca8ea89d11"},"username":"jingjing","password":"123","gender":"未知","age":36}
+{"_id":{"$oid":"5d56781e08208606d00aefd7"},"username":"dingding","password":"123","age":32,"gender":"male"}
+{"_id":{"$oid":"5d5678a1134b5a5e480198cf"},"username":"lili","password":"123","age":18,"gender":"male"}

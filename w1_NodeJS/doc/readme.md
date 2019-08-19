@@ -536,3 +536,52 @@
     * mongodb
     * mongoose
     * 文档操作CRUD
+
+## day2-1
+
+### 面试题
+* git冲突怎么处理
+    * review
+    * 冲突很难避免，但可以减少
+        * 合理分配任务
+        * 模块开发
+        * 规范开发流程
+
+* async&await的理解
+    * 如何捕获错误
+        * `throw new Error()`
+        * try...catch
+* 前后端联调，接口未完成时怎么处理
+    * 数据返回格式不是想要的格式时怎么处理
+    * 需求文档
+
+### 复习
+* mySQL
+    * 安装mySQL
+    * php
+        * 驱动：mysqli
+    * node
+        * 驱动 mysql
+* MongoDB
+    * 安装mongoDB数据库
+    * node
+        * 驱动
+            * mongodb
+            * mongoose
+        * 操作
+            * 增
+                * insertOne(data)
+                * insertMany(data)
+            * 删
+                * deleteOne(query)
+                * deleteMany(query)
+            * 改
+                * updateOne(query,data)
+                * updateMany(query,data)
+            * 查
+                * find(query)
+                * findOne(query)
+    * 概念
+        * database
+        * collection
+        * document
