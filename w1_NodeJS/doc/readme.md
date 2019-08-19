@@ -554,6 +554,42 @@
 * 前后端联调，接口未完成时怎么处理
     * 数据返回格式不是想要的格式时怎么处理
     * 需求文档
+* web页面的重绘和重排
+    * 重绘不一定造成重排
+    * 但重排肯定造成重绘
+* js中的继承
+    * 原型链继承
+    * 借用构造函数
+        * call/apply
+    * ES6的继承
+        * extends
+        * super
+    ```js
+        class Person{
+            constructor(){
+                this.username = 'laoxie';
+                this.age = 18
+            }
+            say(){}
+            eat(){}
+        }
+
+        class Student extends Person{
+            constructor(){
+                super()
+                this.type = 'student';
+            }
+        }
+
+        new Student();
+
+    ```
+* 如何改变this指向
+    * bind、call、apply
+    ```js
+        fn.bind(obj);// 把fn的this改成obj，返回一个新的函数
+        fn.call(obj);// 把fn的this改成obj，并执行fn，参数可以为多个
+        fn.apply(obj);//把fn的this改成obj，并执行fn，参数只能为1个数组
 
 ### 复习
 * mySQL
@@ -585,3 +621,26 @@
         * database
         * collection
         * document
+
+### 知识点
+* MongoDB
+    * 导入导出
+    * 备份恢复
+* 加密解密
+    * base64
+        * a <--算法--> xxxxx
+        * http://nodejs.cn/api/stream.html
+        * https://www.alipay.com/
+* WebSocket
+    * IE10+
+    * IE6-9: 轮询
+
+* 多人聊天室
+    * 所需技术
+        * express
+        * ws
+    * 前端
+        * HTML5新特性：WebSocket
+    * 后端
+        * ws
+        * 结合express服务器与websocket服务器

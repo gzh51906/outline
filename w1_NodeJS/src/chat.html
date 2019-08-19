@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多人聊天室</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		.msg-list{position:relative;width:600px;margin:0 auto;}
+		.msg-list ul{padding:10px;min-height:200px;max-height:400px;overflow-y:auto;border:1px solid #ddd;}
+		.msg-list li{float:left;clear:both;margin:10px 0;padding:5px;line-height:2;border-radius:5px;background-color:#efefef;}
+		.msg-list li.active{float:right;background-color:#58bc58;color:#fff;}
+		.msg-list textarea{display:block;min-height:50px;margin:10px 0;width:100%;box-sizing: border-box;}
+		.status{display:none;position: absolute;left:50px;bottom:0;right:0;padding:5px 10px;text-align:center;color:#999;}
+		.login{text-align:right;}
+	</style>
+</head>
+<body>
+	<h1>多人聊天室</h1>
+	<div id="autoAnswer" class="msg-list">
+		<div class="login"><input type="text" name="username" id="username"><button class="btn-login">进入</button><button class="btn-logout">退出</a></div>
+		<ul>
+		</ul>
+		<textarea></textarea>
+		<button class="btn-send">提交</button>
+		<div class="status"></div>
+	</div>
+	<script>
+		(()=>{
+			/**
+			 * 客户端Socket
+				1. 连接Websocket服务器
+				2. 发送消息到websocket服务器
+				3. 接收websocket服务器广播的消息并渲染到页面
+
+				前后端协商socket状态:
+				统一数据格式：{status,data}
+					* status:
+						0:退出登录
+						1:登录成功
+						2:发送消息
+					* data:{username,content,time}
+			 */
+			let autoAnswer = document.querySelector('#autoAnswer');
+			let login = autoAnswer.querySelector('.login');
+			let username = login.children[0];
+
+			let msglist = autoAnswer.querySelector('ul');
+			let msg = autoAnswer.querySelector('textarea');
+			let btnSend = autoAnswer.querySelector('.btn-send');
+			let status = autoAnswer.querySelector('.status');
+
+			var socket,datalist=[];
+
+			// 连接socket服务器
+			login.onclick = e=>{
+				if(e.target.className === 'btn-login'){
+					// 进入多人聊天室
+					//连接 socket 服务器
+					socket = new WebSocket('ws://localhost:1906');
+					
+					// 当连接成功后执行onopen事件处理函数
+					socket.onopen = (e)=>{
+						status.style.display = 'block';
+						status.innerText = '服务已连接 ' + e.target.url;
+						username.disabled = true;
+
+						// 发送消息给服务器,让服务器广播当前连接的信息
+						let data = {
+							status:1,
+							data:{
+								username:username.value,
+								time:Date.now()
+							}
+						}
+						socket.send(JSON.stringify(data));
+					}
+
+					// 处理后端广播的消息
+					// 消息存放在: e.data
+					socket.onmessage = e=>{
+						// 格式化数据
+						let res = JSON.parse(e.data);
+
+						switch(res.status){
+							case 0:
+								status.innerHTML = res.data.username + '退出入聊天室...';
+								break;
+							case 1:
+								status.innerHTML = res.data.username + '进入聊天室...';
+								break;
+							case 2:
+								datalist.push(res.data);
+								render();
+						}
+					}	
+
+				}else if(e.target.className === 'btn-logout'){
+					// 退出多人聊天室
+					let data = {
+						status:0,
+						data:{
+							username:username.value,
+							time:Date.now()
+						}
+					}
+					socket.send(JSON.stringify(data));
+					socket.close();
+
+					username.disabled = false;
+					username.value = '';
+					datalist = [];
+					render();
+				}
+			}
+
+
+			// 发送消息
+			btnSend.onclick = ()=>{
+				let data = {
+					status:2,
+					data:{
+						username:username.value,
+						content:msg.value,
+						time:Date.now()
+					}
+				}
+				socket.send(JSON.stringify(data));
+
+				// 自动获得焦点
+				msg.value = '';
+				msg.focus();
+			}
+			
+			function render(){
+				msglist.innerHTML = datalist.map(item=>{
+					return `<li ${item.username===username.value ? 'class="active"':''}>
+						<strong>${item.username}</strong>
+						<div>${item.content}</div>
+						<time>${item.time}</time>
+					</li>`
+				}).join('')
+			}
+		})();
+	</script>
+</body>
+</html>
