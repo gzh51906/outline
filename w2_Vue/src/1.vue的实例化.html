@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue的实例化</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>1.vue的实例化</h1>
+    <div id="app">
+        <h1>{{text}}</h1>
+        
+    </div>
+
+    <template id="mytemplate">
+        <div>
+            <p>{{num}}</p>
+            <button v-on:click="changeNum">点我有惊喜</button>
+        </div>
+    </template>
+    <script>
+        /**
+            Vue与传统操作的区别
+                * 传统：操作节点
+                    
+                * Vue： 
+                    * 用户关注数据操作
+                    * Vue来操作节点
+                
+                    >重点：思维模式的转变（把节点操作的思维转到数据操作）
+            
+                * Vue实例化配置参数
+                    * el: 目标元素(挂载点)
+                    * data: 数据
+                    * template：模板
+                    * methods：定义方法
+                    
+                * 数据绑定
+                    * {{}}
+                * 指令（自定义属性）
+                    * v-on  ： 事件绑定
+                        格式：`v-on:click="事件处理函数"`
+
+         */
+
+        // let app = document.getElementById('app');
+        // app.innerHTML = 'h5_1906'
+
+        let data = {
+            text:'H5_1906班',
+            username:'laoxie',
+            num:10
+        }
+        new Vue({
+            // 配置参数
+            el:'#app',
+            data:data,
+            template:`#mytemplate`,
+            methods:{
+                changeNum:function(){
+                    // 这里的this指向vue实例
+                    this.num++;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
