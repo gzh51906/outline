@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.数据驱动的原理</title>
+    <script src="./js/vue.js"></script>
+    <style>
+        #app img{width:300px;height:300px;border:20px solid #ddd;}
+    </style>
+</head>
+<body>
+    <h1>2.数据驱动的原理</h1>
+    <div id="app">
+        <!-- 直接写在挂载点中的数据为实例vm的属性 -->
+        <h4>{{username}}档案</h4>
+        <img v-bind:src="touxiang"/>
+
+        <div>
+            <button v-on:click="show('jingjing')">静静</button>
+            <button v-on:click="show('dingding')">顶顶</button>
+            <button v-on:click="show('laoxie')">谢谢</button>
+        </div>
+
+        {{info}}
+    </div>
+
+    <div id="test">JINGJING</div>
+    <script>
+        /**
+            指令
+                * v-on
+                    * 格式：v-on:事件类型=事件处理函数
+                * v-bind    属性绑定
+                    * 格式: v-bind:属性=属性值
+
+            数据驱动：数据的修改影响UI的展示
+                * 属性特性
+                    * 值属性：有一个值的属性
+                        * configurable  ：可配置性（总开关,控制enumerable&writable是否可修改）
+                        * enumerable    : 可枚举性
+                        * writable      ：可写性
+                        * value         ：值
+                    * 存储器属性
+                        * configurable
+                        * enumerable
+                        * get
+                        * set
+                * 查看属性特性
+                    * Object.getOwnPropertyDescriptor()
+                    * Object.getOwnPropertyDescriptors()
+                * 实例化Vue时，写入data的数据会被Vue通过Object.defineProperty()变成gettter&setter，
+                这种属性称之为响应式属性
+                    * 初始化data
+                    * Vue.set()/vm.$set()
+                    * 数组变异方法
+
+        */
+        
+        let data = {
+            username:'jingjing',
+            touxiang:'img/jingjing.png',
+            info:{
+                password:'123',
+                gender:'女'
+            }
+        }
+        let vm = new Vue({
+            el:'#app',
+            data,
+            methods:{
+                show(name){
+                    console.log(name);
+
+                    this.username = name;
+                    this.touxiang = 'img/'+name + (name==='jingjing' ? '.png' : '.jpg');
+
+                    
+                }
+            }
+        });
+
+        // let mydata = {
+        //     color:'yellow'
+        // }
+
+        // 利用Object.defineProperty定义的属性，属性特性默认为false
+        // 利用传统方式定义的属性，属性特性默认true
+        let obj = {
+            username:'laoxie',//传统属性定义方式：可以随意修改
+            // get color2(){
+            //     return mydata.color
+            // },
+            // set color2(val){
+            //     mydata.color = val
+            // }
+        }
+        // 设置一个不允许改变的属性
+        Object.defineProperty(obj,'age',{
+            value:18
+        })
+
+        Object.defineProperty(obj,'username',{
+            value:'jingjing'
+        })
+
+        // 存储器属性
+        Object.defineProperty(obj,'nickname',{
+            configurable:true,
+            enumerable:true,
+            get(){
+                // 通过obj.nickname获取值时，执行这里的代码
+               return this.username.toUpperCase();
+            },
+            set(val){
+                // 通过obj.nickname=val时，执行这里的代码。并传入val
+                // 可以在这里监听nickname是否被修改
+
+                document.getElementById('test').innerText = val;
+            }
+        })
+
+        // obj.username = xxx
+        // obj.nickname = xxx
+       
+    </script>
+</body>
+</html>

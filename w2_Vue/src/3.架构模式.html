@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.架构模式</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h1>3.架构模式</h1>
+    <!-- 2.View -->
+    <div id="app">
+        <!-- 单向数据绑定 -->
+        <p>单向数据绑定：{{username}} </p>
+        <p>单向数据绑定：<input type="text" v-bind:value="username" /></p>
+        <p>双向数据绑定：<input type="text" v-model="username" /></p>
+    </div>
+    <script>
+        /**
+            架构模式（分层） 
+                * MVC
+                    * 数据Model
+                    * 视图View
+                    * 控制器Controller
+                * MVP
+                    * Model
+                    * View
+                    * Presenter
+                * MVVM
+                    * Model
+                    * View
+                    * ViewModel
+            
+            * 指令
+                * v-on
+                * v-bind    单向数据绑定
+                * v-model   双向数据绑定
+            
+                
+         
+         */
+
+        //  1.Model
+        let data = {
+            username:'jingjing',
+            password:12345
+        }
+
+        // 3.ViewModel：Vue的实例
+        let vm = new Vue({
+            el:'#app',  // 通过el属性把View关联到ViewModel
+            data        // 通过data属性把Model关联到ViewModel
+        });
+
+
+        // data.username = 'laoxie';
+    </script>
+</body>
+</html>

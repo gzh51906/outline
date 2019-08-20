@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.双向数据绑定的原理</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h1>4.双向数据绑定的原理</h1>
+    <div id="app">
+        <!-- 单向数据绑定 -->
+        <p>单向数据绑定：{{username}} </p>
+        <p>单向数据绑定：<input type="text" v-bind:value="username" v-on:input="changeUsername" /></p>
+        <p>双向数据绑定：<input type="text" v-model="username" /></p>
+    </div>
+    <script>
+        /**
+            
+            * 指令
+                * v-on
+                * v-bind    单向数据绑定
+                * v-model   双向数据绑定
+            
+            双向数据绑定原理
+                > 双向数据绑定 = 单向数据绑定+事件，换句话说，v-model=v-bind+v-on
+                * Model -> View ： getter&setter
+                    * 在实例化Vue时，自动把data下的属性变成响应式属性（getter&setter）,这样就能监听到数据的修改，并在在数据修改时更新View视图
+                * View -> Model ：事件
+                    * 通过事件触发改变数据层Model中的数据
+         */
+
+
+        let vm = new Vue({
+            el:'#app', 
+            data:{
+                username:'jingjing',
+                password:12345
+            },
+            methods:{
+                changeUsername(e){
+                    this.username = e.target.value;
+                }
+            }
+        });
+
+
+        // data.username = 'laoxie';
+    </script>
+</body>
+</html>

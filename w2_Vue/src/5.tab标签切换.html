@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.tab标签切换</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .mytabs img{width:300px;}
+    </style>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h1>5.tab标签切换</h1>
+    <div id="app">
+        <div class="mytabs container-fluid">
+            <ul class="nav nav-tabs">
+                <li class="nav-item" v-for="(item,idx) in tabs">
+                    <a class="nav-link" :class="{active:idx===activeIdx}" href="#" @click="changeIdx(idx,$event)">{{item.name}}</a>
+                </li>
+            </ul>
+            <div v-for="(item,idx) in tabs" class="p-3 border" v-show="idx===activeIdx">
+                <img :src="item.imgurl"/>
+                <p>
+                    {{item.name + '最爱' + item.hobby}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        /**
+            * 指令
+                * v-on      事件绑定，简写@
+                * v-bind    单向数据绑定，简写:
+                * v-model   双向数据绑定
+                * v-for     列表循环
+                    * in
+                    * of
+                * v-show    显示(display:none)
+                * v-if      条件显示（节点移除与创建）
+                    * v-else-if="xx"
+                    * v-else
+
+        */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                activeIdx:0,
+                tabs:[{
+                    name:'laoxie',
+                    imgurl:'img/laoxie.jpg',
+                    hobby:'写代码'
+                },{
+                    name:'jingjing',
+                    imgurl:'img/jingjing.png',
+                    hobby:'做运动'
+                },{
+                    name:'tingting',
+                    imgurl:'img/tingting.jpg',
+                    hobby:'大保健'
+                },{
+                    name:'dingding',
+                    imgurl:'img/dingding.jpg',
+                    hobby:'跟tingting大保健'
+                },{
+                    name:'lemon',
+                    imgurl:'img/lemon.jpg',
+                    hobby:'删库跑路'
+                }]
+            },
+            methods:{
+                changeIdx(idx,e){console.log(idx,e)
+                    // 如果不传参：第一个参数event
+                    // 传参：没有event，必须手动传入（在事件触发时，event对象会写入vm实例的$event属性）
+                    this.activeIdx = idx
+                }
+            }
+        })
+    </script>
+</body>
+</html>
