@@ -78,3 +78,86 @@
         * 压缩合并：删除了警告，上线使用
     * CDN
     * npm / yarn
+
+## day2-3
+
+### 面试题
+* Vue双向数据绑定的原理
+    * Model -> View : getter&setter
+    * View -> Model : 事件
+
+    * v-model 的原理：能用什么操作来替代v-model（单向加+事件）
+        * {{}}
+        * v-bind
+* 实例化对象的执行过程
+    1. 创建一个对象 vm->Object.prototype
+    2. 改变this指向
+    3. 改变原型对象的向 vm->Vue.prototype
+    4. 执行构造函数中的代码，给vm添加属性
+    5. 返回vm
+* http协议与ws协议的区别
+    * socket心跳
+
+### 复习
+* 属性特性
+    > 传统方式定义属性，属性特性默认为true，通过Object.defineProperty定义的属性，属性特性默认为false
+    * 值属性
+        * configurable
+        * enumerable
+        * writable
+        * value
+    * 存储器属性
+        * configurable
+        * enumerable
+        * get
+        * set
+
+        obj = {
+            a:10,
+            b:function(){
+
+            },
+            get c(){
+                return this.a;
+            },
+            set c(val){
+                this.a = val
+                // 为所欲为
+            }
+        }
+
+        obj.b()
+        obj.c ;//10
+        obj.c = 100
+* Vue
+    * 指令
+        * v-on      @
+        * v-bind    :
+            * 属性
+                * class
+                * style
+        * v-model
+        * v-if/v-else-if/v-else
+        * v-for
+            * in
+            * of
+        * v-show
+        * 
+    * 实例化配置参数
+    * 响应式属性
+        * 初始化data
+        * Vue.set(target,key,val) / vm.$set(target,key,val)
+            * target不可以是vm实例和data属性
+        * 数组变异方法
+    * 架构模式
+        * MVC
+        * MVP
+        * MVVM
+    * 思维的转变
+        * 关注节点操作 -> 关注数据
+
+### 知识点
+* Vue实例化过程
+    * 这里定义的data为值属性
+    但在实例化后，Vue会通过Object.defineProperty()把他们变成存储器属性（getter&setter）
+    并写入vm实例（意味着可以在代码中通过this访问到这些属性）

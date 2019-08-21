@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6.实例化属性与配置参数</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <h1>6.实例化属性与配置参数</h1>
+    <div id="app">
+        <!-- 能直接写在挂载点中的变量都是vm实例的属性 -->
+        <p>原数据：{{username}}</p>
+        <!-- 在双花括号中的代码不建议写得太过复杂 -->
+        <!-- <p>倒序：{{username.split('').reverse().join('')}}</p> -->
+        <p>方法倒序：{{reverseUsername()}}</p>
+        <p>computed倒序：{{rusername}}</p>
+        <input type="text" v-model="username">
+    </div>
+    <script>
+        /**
+            实例属性&方法
+                * vm.$set()
+                * vm.$on()
+                * vm.$off()
+                * vm.$emit()
+            配置参数
+                * el
+                * data
+                * methods
+                * template
+                * computed
+                    * 会缓存
+        */
+       let vm = new Vue({
+           el:'#app',
+
+            // 这里定义的data为值属性
+            // 但在实例化后，Vue会通过Object.defineProperty()把他们变成存储器属性（getter&setter）
+            // 并写入vm实例（意味着可以在代码中通过this访问到这些属性）
+           data:{
+               username:'jingjing',
+               password:123
+           },
+           computed:{
+                // 这里的数据为存储器属性（默认为getter）
+                // rusername(){
+                //     return this.username.split('').reverse().join('')
+                // },
+
+                // getter&setter
+                rusername:{
+                    get(){
+                        return this.username.split('').reverse().join('')
+                    },
+                    set(val){
+                        this.username = val;
+                    }
+                }
+           },
+           methods:{
+               show(){
+                    this.password
+               },
+               reverseUsername(){
+                    return this.username.split('').reverse().join('')
+               }
+           }
+       });
+
+       console.log(vm)
+
+    // 给vm添加自定义事件
+    vm.$on('hello',()=>{
+        console.log("hello jingjing")
+    })
+
+    vm.$off('hello');
+
+
+        
+    </script>
+</body>
+</html>

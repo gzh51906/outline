@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8.TodoList待办事项</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>8.TodoList待办事项</h1>
+        <div id="app">
+            <!-- 输入框 -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" ref="keyword" v-model.trim="keyword" @keyup.13="addItem" placeholder="Recipient's username" />
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button" @click="addItem">添加</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"><input type="checkbox"/>全选</th>
+                        <th scope="col">#</th>
+                        <th scope="col">待办事项</th>
+                        <th scope="col">完成时间</th>
+                        <th scope="col">是否完成</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,idx) in datalist" :class="{'table-primary':item.done}">
+                        <th><input type="checkbox"/></th>
+                        <th>{{idx+1}}</th>
+                        <td>{{item.content}}</td>
+                        <td>{{item.time}}</td>
+                        <td>{{item.done?'是':'否'}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-success" @click="completeItem(idx)">完成</button>
+                                <button type="button" class="btn btn-outline-danger" @click="removeItem(idx)">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        /**
+            在Vue中获取真实dom节点
+                1. 给元素添加ref属性: ref='xxx'
+                2. 通过vm.$refs.xxx获取这个元素
+        */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                datalist:[
+                    {
+                        content:'完成Vue团队项目',
+                        time:'2019-9-9',
+                        done:false,
+                    }
+                ],
+                keyword:''
+            },
+            methods:{
+                addItem(e){
+                    let data = {
+                        content:this.keyword,
+                        time:Date.now(),
+                        done:false
+                    }
+                    this.datalist.push(data)
+
+                    // 清空并获得焦点
+                    this.keyword = '';
+                    this.$refs.keyword.focus();
+                    
+                },
+                removeItem(idx){
+                    this.datalist.splice(idx,1)
+                },
+                completeItem(idx){
+                    this.datalist.forEach((item,i)=>{
+                        if(i === idx){
+                            item.done = true;
+                        }
+                    })
+                }
+            }
+        })
+
+        // vm.$mount('#app')
+    </script>
+</body>
+
+</html>
