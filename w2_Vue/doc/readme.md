@@ -98,6 +98,21 @@
 * http协议与ws协议的区别
     * socket心跳
 
+* nodejs版本
+    * 多版本共存nvm
+        * 安装node: nvm install xxx
+        * 切换node: nvm use xxx
+* 乱码的根源
+    * 编码不一致
+* 自适应布局问题
+    * flex
+    * 定位
+* gulp的方法
+    * gulp.task()
+    * gulp.src()
+    * gulp.dest()
+    * gulp.watch()
+
 ### 复习
 * 属性特性
     > 传统方式定义属性，属性特性默认为true，通过Object.defineProperty定义的属性，属性特性默认为false
@@ -161,3 +176,13 @@
     * 这里定义的data为值属性
     但在实例化后，Vue会通过Object.defineProperty()把他们变成存储器属性（getter&setter）
     并写入vm实例（意味着可以在代码中通过this访问到这些属性）
+* 模块化（组件化）
+* 组件
+    > 组件就是一个Vue实例
+    * 全局组件
+        * 定义：Vue.component(name,options)
+            * name：组件名称
+            * options:组件配置参数
+    * 局部组件
+* 组件通讯
+    * 数据流（数据流向：上->下，单向数据流）
