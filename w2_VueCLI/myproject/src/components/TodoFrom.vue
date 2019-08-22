@@ -8,7 +8,7 @@
 </template>
 <script>
 export default {
-    props:['additem'],
+    props:['addItem'],
     data(){
         return {
             keyword:''
@@ -16,11 +16,14 @@ export default {
     },
     methods:{
         add(){
-            this.additem(this.keyword);
+            // this.addItem(this.keyword);
+            this.$emit('add',this.keyword) 
 
             // 清空并获得焦点
             this.keyword = '';
             this.$refs.keyword.focus();
+
+            this.$emit('update:changenum',100)
         }
     }
 }

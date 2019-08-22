@@ -205,10 +205,18 @@
 * Vue组件的data属性为什么必须为函数
     * 复用
 * v-model的原理
-    * Model -> View：v-bind:value="xxx"     getter&setter
-    * View -> Model：v-on:input="xxx"       事件
+    * Model -> View：v-bind:value="xxx"      getter&setter
+    * View -> Model：v-on:input="xxx"        事件
 * Vue如何定义组件
     * 全局组件与局部组件的区别
+* 懒加载与预加载的区别
+    * 懒加载：被动
+    * 预加载：主动
+* 改变this指向的方式
+    * 箭头函数没有this
+* Vue的方法中为什么能通过this.xxx访问
+    * 实例化过程会把data,computed,methods,props等属性写入实例
+
 
 ### 复习
 * 实例属性/方法
@@ -230,8 +238,7 @@
         * 父->子：props
             1. 父组件：定义属性
             2. 子组件：接收属性
-        * 子->父：
-        * 兄弟->兄弟：
+       
 
 ### 知识点
 * npm script （npm脚本命令）
@@ -245,3 +252,22 @@
     > 模块对象，只能在服务器环境下使用
     * import
     * export
+
+* 组件通讯
+    * 父->子：props
+        1. 父组件：定义属性
+        2. 子组件：接收属性
+     * 子->父：
+        1. 父组件：自定义事件
+            * v-on:xxx="事件处理函数"
+        2. 子组件：触发自定义事件
+            * this.$emit('xxx',数据)
+        * 简单数据
+            1. 父组件：v-bind:xxx.sync="num"  === v-on:update:xxx="(val)=>{num=val}"
+            2. 子组件：this.$emit('update:xxx','数据')
+    * 兄弟->兄弟：
+        1. 兄弟->父
+        2. 父->兄弟
+    * 深层组件传输
+        * Bus总线
+        * Vuex

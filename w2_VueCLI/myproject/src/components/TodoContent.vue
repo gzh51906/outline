@@ -12,10 +12,15 @@
         </thead>
         <tbody>
             <!-- <tr is="todo-item" v-for="(item,idx) in datalist" :data="item" :idx="idx"></tr> -->
-            <TodoItem 
+            <!-- <TodoItem 
             v-for="(item,idx) in datalist" 
             :data="item" :idx="idx" :key="item.time" 
             :completeitem="completeitem" :removeitem="removeitem"
+            /> -->
+
+            <TodoItem 
+            v-for="(item,idx) in datalist" 
+            :data="item" :idx="idx" :key="item.time" 
             />
         </tbody>
     </table>
@@ -23,7 +28,9 @@
 <script>
 import TodoItem from './TodoItem.vue';
 export default {
-    props:['datalist','removeitem','completeitem'],
+    name:'TodoContent',
+    // props:['datalist','removeitem','completeitem'],
+    props:['datalist'],
     components:{
         TodoItem
     }
