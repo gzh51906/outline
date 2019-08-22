@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ESModule</title>
+    <script type="text/javascript">
+    /**
+        作用域
+            * 全局作用
+            * 局部作用
+            * 块级作用域
+            * 模块作用域
+    */
+        var username = 'laoxie'
+    </script>
+    <!-- <script src="./js/mymodule.js"></script> -->
+    <script type="module">
+        // 引入其他ES模块
+        // 引入模块对象中的dingding,show属性
+        import {dingding as dd,show} from './js/mymodule.js';
+
+        // 引入整个模块对象并命名为mymodule
+        import * as mymodule from './js/mymodule.js';
+
+        // 引入模块对象的default属性（默认属性）
+        import psw from './js/mymodule.js'
+
+        var password = 123456;
+
+        console.log('module:',mymodule)
+        console.log('module.key',dd,show)
+        console.log('module.default',psw)
+    </script>
+</head>
+<body>
+    <h1>ESModule</h1>
+    <!-- <script>
+        console.log(username)
+        // console.log(password) 
+        console.log('传统：',obj)  
+    </script> -->
+</body>
+</html>

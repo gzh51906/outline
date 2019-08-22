@@ -184,5 +184,64 @@
             * name：组件名称
             * options:组件配置参数
     * 局部组件
+        * components
 * 组件通讯
     * 数据流（数据流向：上->下，单向数据流）
+    * 父->子：props
+        1. 定义属性
+        2. 接收属性
+
+## day2-4
+
+### 面试题
+* Vue的数据绑定有哪几种
+    * 内容
+        * {{}}
+        * v-text
+        * v-html
+        * v-model
+    * 属性
+        * v-bind
+* Vue组件的data属性为什么必须为函数
+    * 复用
+* v-model的原理
+    * Model -> View：v-bind:value="xxx"     getter&setter
+    * View -> Model：v-on:input="xxx"       事件
+* Vue如何定义组件
+    * 全局组件与局部组件的区别
+
+### 复习
+* 实例属性/方法
+* 配置参数
+* 组件
+    > 模块化开发，一个组件就是一个Vue的实例
+    * 为什么要使用组件化开发
+        * 复用
+        * 维护与版本迭代更容易
+    * 定义：定义一个组件其实就是自定义一个标签
+        * 全局：Vue.component(name,option)
+        * 局部：components
+        * 规定
+            * 无el属性
+            * data属性必须为函数
+            * 只允许有一个根节点
+            * 组件名必须为小写（w3c）
+    * 组件通讯
+        * 父->子：props
+            1. 父组件：定义属性
+            2. 子组件：接收属性
+        * 子->父：
+        * 兄弟->兄弟：
+
+### 知识点
+* npm script （npm脚本命令）
+* VueCLI： 
+    * 基于Vue+Webpack+babel
+    * 热更新
+* vue的单文件组件
+    * 后缀：.vue
+    * 实现把html、css、js组合在一个后缀为.vue的文件中
+* ES Module
+    > 模块对象，只能在服务器环境下使用
+    * import
+    * export
