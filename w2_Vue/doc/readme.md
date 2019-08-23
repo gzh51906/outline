@@ -289,6 +289,43 @@
 
     }
 ```
+* jquery的优点
+    * 选择器
+    * 动画
+    * ajax
+    * ....
+* 说说闭包的理解与应用场景
+    * 函数嵌套，并返回
+    * 垃圾回收机制
+        * 标记清除
+        * 引用计数 
+    ```js
+        var username = 'laoxie';
+
+        function show(){
+            var num = 10;
+
+            var obj = {}
+
+            // ...
+            return function(){
+                num++;
+            }
+        }
+
+        let res = show();
+        res();
+        res();
+    ```
+* 加密方式与算法
+    * 单向加密（不可逆）
+        * MD5
+        * sha1
+    * 双向加密（可逆）
+        * 对称加密
+        * 非对称加密
+* 编码的关系
+    * ascii -> utf8
 
 ### 复习
 * 组件
@@ -347,3 +384,10 @@
         * required  必填
         * default   默认值
             > 引用数据类型默认值必须为一个函数，并return一个值
+* 插槽slot
+    > 内容传输
+    * <slot>
+        * name
+    * v-slot
+        * 命名插槽（父->子）：v-slot:name
+        * 作用域插槽（子->父）：v-slot:name="scope"

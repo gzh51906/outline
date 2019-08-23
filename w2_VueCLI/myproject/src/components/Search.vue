@@ -1,11 +1,11 @@
 <template>
   <div class="search mt-5">
-    <h4><slot name="title"></slot></h4>
+    <h4><slot name="title" :username="username" :password="true"></slot></h4>
     <div class="input-group">
       <input type="search" class="form-control" v-model="keyword" />
       <div class="input-group-append">
         <!-- <button class="btn btn-danger" type="button">{{buttonText}}</button> -->
-        <button class="btn btn-danger" type="button"><slot/></button>
+        <button class="btn btn-danger" type="button"><slot a="10" b="20"/></button>
       </div>
     </div>
     <ul class="list-group">
@@ -25,7 +25,8 @@ export default {
     },
     data(){
         return {
-            keyword:''
+            keyword:'',
+            username:'laoxie'
         }
     },
     computed:{

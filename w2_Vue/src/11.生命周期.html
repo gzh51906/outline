@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>11.生命周期</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>11.生命周期</h1>
+        <div id="app">
+            {{message}}
+            <button @click="num++">点我{{num}}</button>
+        </div>
+    </div>
+    <script>
+        /**
+            生命周期：Vue从实例化到销毁的过程
+                * 生命周期函数（钩子函数）
+                    * 创建阶段
+                        * beforeCreate
+                        * created
+                    * 挂载阶段
+                        * beforeMount
+                        * mounted
+                    * 更新阶段
+                        * beforeUpdate
+                        * updated
+                    * 销毁阶段
+                        * beforeDestroy
+                        * destroyed
+
+        */
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                message:'laoxie is good',
+                num:10
+            },
+            beforeCreate: function () {
+				console.group('beforeCreate 创建前状态===============》');
+				console.log("el     : " + this.$el); //undefined
+				console.log("data   : " + this.$data); //undefined 
+				console.log("message: " + this.message);//undefined
+				console.groupEnd();
+			},
+			created: function () {
+				console.group('created 创建完毕状态===============》');
+				console.log("el     : " + this.$el); //undefined
+				console.log("data   : " + JSON.stringify(this.$data)); //已被初始化 
+				console.log("message: " + this.message); //已被初始化
+				console.groupEnd();
+			},
+			beforeMount: function () {
+				console.group('beforeMount 挂载前状态===============》');
+				console.log("el     : " , this.$el); //已被初始化
+				console.log("data   : " + JSON.stringify(this.$data)); //已被初始化  
+				console.log("message: " + this.message); //已被初始化 
+				console.groupEnd();
+			},
+			mounted: function () {
+				console.group('mounted 挂载结束状态===============》');
+				console.log("el     : " , this.$el); //已被初始化
+				console.log("data   : " + JSON.stringify(this.$data)); //已被初始化
+				console.log("message: " + this.message); //已被初始化 
+				console.groupEnd();
+			},
+			beforeUpdate: function () {
+				console.group('beforeUpdate 更新前状态===============》');
+				console.log("el     : " , this.$el.innerText);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message); 
+				console.groupEnd();
+			},
+			updated: function () {
+				console.group('updated 更新完成状态===============》');
+				console.log("el     : " , this.$el.innerText);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message); 
+				console.groupEnd();
+			},
+			beforeDestroy: function () {
+				console.group('beforeDestroy 销毁前状态===============》');
+				console.log("el     : " , this.$el);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message); 
+				console.groupEnd();
+			},
+			destroyed: function () {
+				console.group('destroyed 销毁完成状态===============》');
+				console.log("el     : " , this.$el);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message);
+				console.groupEnd();
+			},
+
+			// for keep-alive
+			activated(){
+				console.group('activated 组件被激活===============》');
+				console.log("el     : " , this.$el);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message);
+				console.groupEnd();
+			},
+			deactivated(){
+				console.group('deactivated 组件被移除===============》');
+				console.log("el     : " , this.$el);
+				console.log("data   : " + JSON.stringify(this.$data)); 
+				console.log("message: " + this.message);
+				console.groupEnd();
+			}
+        });
+
+        console.log(vm)
+    </script>
+</body>
+
+</html>

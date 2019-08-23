@@ -6,8 +6,8 @@
     <!-- <MySearch buttonText="查询" :data="city"/>
     <MySearch buttonText="搜索" :data="web"/> -->
     <MySearch :data="city">
-      查询
-      <template v-slot:title>中国热门城市</template>
+      <template v-slot:default="scope">查询{{scope}}</template>
+      <template v-slot:title="mycity">中国热门城市{{mycity.username}}</template>
     </MySearch>
     <MySearch :data="web">
       <template v-slot:title>h5大前端所学知识</template>
