@@ -2,12 +2,13 @@
   <div class="todolist">{{num}}
     <!-- <TodoForm :addItem="addItem"></TodoForm> -->
     <!-- 等效于：TodoForm.$on('add' ,addItem) -->
-    <TodoForm v-on:add="addItem" v-bind:changenum.sync="num"></TodoForm>
+    <TodoForm ref="todoForm" v-on:add="addItem" v-bind:changenum.sync="num"></TodoForm>
     <!-- <TodoContent :datalist="datalist" :completeitem="completeItem" :removeitem="removeItem" ></TodoContent> -->
     <TodoContent :datalist="datalist"></TodoContent>
   </div>
 </template>
 <script>
+
 /**
     深层次组件传参: Bus总线（利用Vue实例作为中间桥梁实现数据传输）
     * $on()   自定义事件
@@ -70,6 +71,7 @@ export default {
     }
   },
   mounted(){
+
 
     // 自定义事件
     Bus.$on('remove',idx=>{

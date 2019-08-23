@@ -271,3 +271,79 @@
     * 深层组件传输
         * Bus总线
         * Vuex
+
+## day2-5
+
+### 面试题
+* 怎么判断对象象中包含某个属性
+```js
+    let obj = {
+        //..
+        // __proto__:{
+        //     a:10
+        // }
+    }
+
+    // 判断是否有属性a
+    if(obj.a !== undefined){
+
+    }
+```
+
+### 复习
+* 组件
+    * 什么是组件
+        * 是一个模块
+    * 为什么需要组件化开发
+        * 复用
+        * 方便后期的维护
+    * 开发前的准备工作
+        * 给页面划分组件
+    * 定义
+        * 全局
+        * 局部
+    * 单文件组件
+        * html
+        * js
+        * css
+    * 模块化开发
+        * AMD           require.js
+        * CMD           sea.js
+        * CommonJS      nodejs
+            * 导出：module.exports
+            * 导入：require()
+        * ESModule
+            > 模块对象  
+            * 导出：export
+                * var,let,const function class
+                * {},default
+            * 导入：import
+                * as
+                * `*`
+    * 组件通讯
+        * 父->子：props
+            1. 父组件：定义属性
+            2. 子组件：props接收
+        * 子->父：
+            * 常规方法
+                1. 父组件：自定义事件v-on
+                    * 如何在父组件定义子组件的自定义事件
+                        * 在子组件上用v-on指令
+                        * 获取子组件实例：ref -> $on()
+                2. 子组件：触发自定义事件this.$emit
+            * 简单数据
+                * 父组件：v-bind:changenum.sync="num"
+                * 子组件：this.$emit('update:changenum',100)
+        * 兄弟->兄弟
+        * 深层次/无关联组件通讯
+            * Bus
+                * 接收方：自定义事件
+                * 传输方：触发自定义事件
+
+            
+### 知识点
+* 数据类型校验
+    * props父传子
+        * required  必填
+        * default   默认值
+            > 引用数据类型默认值必须为一个函数，并return一个值
