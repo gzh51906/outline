@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>13.缓存组件keep-alive</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+    <style>
+        #app img{height:300px;}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>13.缓存组件keep-alive</h1>
+        <div id="app">
+            <!-- <keep-alive include="laoxie">
+            <keep-alive :include="['laoxie','dingding']"> -->
+            <keep-alive :include="/ing$/">
+                <component :is="current"></component>
+            </keep-alive>
+            <button v-for="item in users" :key="item" @click="current=item">{{item}}</button>
+        </div>
+    </div>
+    <script>
+        /**
+            13.缓存组件keep-alive
+                
+        */
+        
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                users:['laoxie','jingjing','dingding'],
+                current:'laoxie'
+            },
+            components:{
+                laoxie:{
+                    data(){
+                        return {
+                            username:'laoxie',
+                            imgurl:'img/laoxie.jpg',
+                            age:18
+                        }
+                    },
+                    template:`<div>
+                        <img :src="imgurl"/>
+                        <h4>{{username}}</h4>
+                        <button @click="age--">改变年龄{{age}}</button>
+                    </div>`,
+                    created(){
+                        console.log(this.username,'created')
+                    },
+                    destroyed(){
+                        console.log(this.username,'destroyed')
+                    },
+                    activated(){
+                        console.log(this.username,'activated')
+                    },
+                    deactivated(){
+                        console.log(this.username,'deactivated')
+                    }
+                },
+                jingjing:{
+                    data(){
+                        return {
+                            username:'jingjing',
+                            imgurl:'img/jingjing.png',
+                            age:36
+                        }
+                    },
+                    template:`<div>
+                        <img :src="imgurl"/>
+                        <h4>{{username}}</h4>
+                        <button @click="age++">改变年龄{{age}}</button>
+                    </div>`,
+                    created(){
+                        console.log(this.username,'created')
+                    },
+                    destroyed(){
+                        console.log(this.username,'destroyed')
+                    },
+                    // activated(){
+                    //     console.log(this.username,'activated')
+                    // },
+                    // deactivated(){
+                    //     console.log(this.username,'deactivated')
+                    // }
+                },
+                dingding:{
+                    data(){
+                        return {
+                            username:'dingding',
+                            imgurl:'img/dingding.jpg',
+                            age:30
+                        }
+                    },
+                    template:`<div>
+                        <img :src="imgurl"/>
+                        <h4>{{username}}</h4>
+                        <button @click="age++">改变年龄{{age}}</button>
+                    </div>`,
+                    created(){
+                        console.log(this.username,'created')
+                    },
+                    destroyed(){
+                        console.log(this.username,'destroyed')
+                    },
+                    activated(){
+                        console.log(this.username,'activated')
+                    },
+                    deactivated(){
+                        console.log(this.username,'deactivated')
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

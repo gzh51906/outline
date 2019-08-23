@@ -391,3 +391,11 @@
     * v-slot
         * 命名插槽（父->子）：v-slot:name
         * 作用域插槽（子->父）：v-slot:name="scope"
+* Vue UI框架
+    * elementUI         饿了么
+    * iView             腾讯
+    * Ant Design Vue    阿里
+
+* 内置组件
+    * `<slot>`
+    * `<component>`

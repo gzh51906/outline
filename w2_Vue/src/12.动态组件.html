@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>12.动态组件</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+    
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>12.动态组件</h1>
+        <div id="app">
+            <!-- <laoxie></laoxie>
+            <jingjing></jingjing>
+            <dingding></dingding> -->
+
+            <component :is="current"></component>
+
+            <button v-for="item in users" :key="item" @click="current=item">{{item}}</button>
+        </div>
+    </div>
+    <script>
+        /**
+            12.动态组件
+                * component： 一容器，用来承载一个组件
+                    * is : string | options
+        */
+        
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                users:['laoxie','jingjing','dingding'],
+                current:'laoxie'
+            },
+            components:{
+                laoxie:{
+                    data(){
+                        return {
+                            username:'laoxie',
+                            imgurl:'img/laoxie.jpg'
+                        }
+                    },
+                    template:`<div><img :src="imgurl"/><h4>{{username}}</h4></div>`
+                },
+                jingjing:{
+                    data(){
+                        return {
+                            username:'jingjing',
+                            imgurl:'img/jingjing.png'
+                        }
+                    },
+                    template:`<div><img :src="imgurl"/><h4>{{username}}</h4></div>`
+                },
+                dingding:{
+                    data(){
+                        return {
+                            username:'dingding',
+                            imgurl:'img/dingding.jpg'
+                        }
+                    },
+                    template:`<div><img :src="imgurl"/><h4>{{username}}</h4></div>`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
