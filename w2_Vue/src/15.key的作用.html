@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>15.key的作用</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>15.key的作用</h1>
+        <div id="app">
+           <ul>
+               <li v-for="item in users" :key="item.id">
+                   <input type="checkbox"/>{{item.username}}
+                </li>
+           </ul>
+           <input type="text" v-model="username"/>
+           <button @click="add">添加</button>
+        </div>
+    </div>
+    <script>
+        /**
+            15.key的作用
+                * 唯一且稳定
+        */
+        
+        let vm = new Vue({
+            // el:'#app',
+            data:{
+                username:'',
+                users:[{
+                    id:1,
+                    username:'laoxie'
+                },{
+                    id:2,
+                    username:'jingjing'
+                },{
+                    id:3,
+                    username:'dingding'
+                }]
+            },
+            methods:{
+                add(){
+                 this.users.splice(1,0,{id:this.users.length+1,username:this.username})
+                }
+            },
+            mounted(){
+                let lis = document.getElementsByTagName('li');
+                
+                for(var i=0;i<lis.length;i++){
+                    lis[i].setAttribute('data-username',this.users[i].username)
+                }
+            }
+        }).$mount('#app')
+        
+    </script>
+</body>
+
+</html>
