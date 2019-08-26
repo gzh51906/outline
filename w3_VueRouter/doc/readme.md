@@ -43,11 +43,15 @@
     * 挂载阶段
     * 更新阶段
     * 销毁阶段
-
     ```js
         <button v-for="item in 1000" @click="">点击</button>
-
     ```
+* 对严格模式的了解
+    * 'use strict'
+* Vue指令的完整格式
+    * v-指令名:参数.修饰符="值"
+* Vue响应式属性在哪个阶段设置完成
+    * 创建阶段
 
 ### 知识点
 * Virtual DOM 虚拟DOM
@@ -114,3 +118,5 @@
         btn.innerText = num;
 
     ```
+* VueRouter
+    * SPA   Single Page Application单页面应用

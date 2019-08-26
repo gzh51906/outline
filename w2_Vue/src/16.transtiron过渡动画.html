@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>16.transtiron过渡动画</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <script src="./js/vue.js"></script>
+    <style>
+        /* 进入阶段 */
+        .v-enter-active{transition: opacity 5s;}
+        .v-enter{opacity: 0}
+        .v-enter-to{opacity: 1;}
+
+        .slide-enter-active{transition: transform 1s;}
+        .slide-enter{transform:translate(0,0)}
+        .slide-enter-to{transform:translate(300px,0)}
+
+
+        /* Leave阶段 */
+        .v-leave-active{transition: opacity 5s;}
+        .v-leave{opacity: 1;}
+        .v-leave-to{opacity: 0;}
+
+        .slide-leave-active{transition: transform 1s;}
+        .slide-leave{transform:translate(300px,0)}
+        .slide-leave-to{transform:translate(0,0)}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>16.transtiron过渡动画</h1>
+        <div id="app">
+            <p>
+                <button @click="show=!show">显示隐藏</button>
+            </p>
+            <!-- <transition name="slide">
+                <img src="img/jingjing.png" v-show="show"/>
+            </transition> -->
+
+            <!-- <transition
+                enter-active-class="animated"
+                enter-to-class="bounceInUp"
+                leave-active-class="animated"
+                leave-to-class="bounceOutUp"
+            >
+                    <img src="img/jingjing.png" v-show="show"/>
+                </transition> -->
+
+
+                <transition-group
+                enter-active-class="animated"
+                enter-to-class="bounceInUp"
+                leave-active-class="animated"
+                leave-to-class="bounceOutUp"
+                tag="div"
+            >
+                    <img src="img/jingjing.png" key="jingjing" v-show="show"/>
+                    <img src="img/laoxie.jpg" key="laoxie" v-show="show"/>
+                </transition-group>
+        </div>
+    </div>
+    <script>
+        /**
+            16.transtiron过渡动画
+                * <transition/>
+                * <transition-group/>
+                * 触发动画条件
+                    * 切换条件
+                        * v-if
+                        * v-show
+                        * <component/>动态组件
+                        * 组件根节点
+                    * 必须设置css过渡或js动画
+                        >transition组件会检测是否设置了css过渡动画
+                        * Enter阶段
+                            * v-enter
+                            * v-enter-to
+                            * v-enter-active
+                        * Leave阶段
+                            * v-leave
+                            * v-leave-to
+                            * v-leave-active
+                        * name：自定义类名
+                            * [name]-enter
+                            * [name]-enter-to
+                            * [name]-enter-active
+        */
+        
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            }
+        })
+        
+    </script>
+</body>
+
+</html>
