@@ -119,4 +119,41 @@
 
     ```
 * VueRouter
-    * SPA   Single Page Application单页面应用
+    * SPA ：Single Page Application单页面应用
+
+## day3-2
+
+### 面试题
+* json数据的格式
+    * 应用场景
+        * 前后端数据交互
+        * 配置文件
+        * mock
+        ...
+    * xml
+* 局部组件与全局组件有区别
+    * 使用范围
+    * 定义方式
+* 组件局部样式
+    * scoped
+    * 原理：css属性选择器
+
+### 复习
+* 过渡动画
+    * <transition>
+    * <transition-group>
+* VueRouter
+    * 使用步骤
+        * 使用：Vue.use()
+    * 配置路由
+### 知识点
+* Vue全家桶
+* 路由导航
+    * 声明式导航<router-link>：利用已经声明的组件`<router-link>`实现导航
+        * to
+        * tag
+        * active-class          /,  /home都添加高亮
+        * exact-active-class    / 不高亮，/home高亮
+    * 编程式导航
+        * this.$route 当前路由信息
+        * this.$router 路由对象
