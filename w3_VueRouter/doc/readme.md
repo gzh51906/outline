@@ -155,5 +155,25 @@
         * active-class          /,  /home都添加高亮
         * exact-active-class    / 不高亮，/home高亮
     * 编程式导航
-        * this.$route 当前路由信息
-        * this.$router 路由对象
+        * this.$route   当前路由信息
+        * this.$router  路由对象
+            * push(path)        等效于`<router-link :to="path"/>`
+            * replace(path)     等效于`<router-link :to="path" replace/>`
+    * 路由传参
+        * 跳转时传参
+            * params    参数保留在$route中，刷新数据会丢失
+                * name方式跳转时才可使用params
+                ```js
+                    this.$router.push({name:'goods',params:{id:123}})
+                    this.$router.push({path:'/goods',params:{id:123}});//不支持
+                ```
+            * query     参数保留在url中，刷新不会丢失
+            * 动态路由
+                * 需要在路由配置中设置，然后在跳转时传递参数
+        * 定义时传参
+            * props : Object|Boolean|Function
+    * <router-view/>
+        * 把url匹配到的组件渲染到router-view组件中，类似component动态组件的作用
+* axios
+    * axios是一个封装了XMLHttpRequest和Promise的ajax请求工具
+    * 格式化数据
