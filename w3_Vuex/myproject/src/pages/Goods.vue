@@ -59,11 +59,12 @@ export default {
             };
         },
         buy(){
-            
+            this.add2cart();
             this.$router.push({name:'cart'})
         },
         add2cart(){
-
+            let {goods_image,goods_price,goods_name,goods_id} = this.data
+            this.$store.commit('addItem',{goods_image,goods_price,goods_name,goods_id,qty:1})
         }
     },
 

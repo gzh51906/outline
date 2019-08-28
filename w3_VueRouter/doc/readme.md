@@ -232,6 +232,16 @@
         * params
             * 只支持name方式跳转时传参
             * 动态路由
+* Vue生命周器每个阶段做了什么
+    * 创建阶段：组件通讯props中，子组件哪个生命周期最先得到props的值：created
+    * 挂载阶段：把实例的数据挂载到视图
+    * 更新阶段：虚拟DOM,diff算法
+    * 销毁阶段：清除监听，事件、响应式属性
+* 项目开始要做哪些准备工作
+    * 搭建环境
+        * 目录
+        * 依赖
+    * 模块化开发
 
 ### 知识点
 * 动态路由
@@ -249,3 +259,9 @@
         * beforeRouteEnter  进入路由前执行
         * beforeRouteUpdate 路由更新时执行
         * beforeRouteLeave  离开当前路由时执行
+
+* Vuex
+    * 核心概念：store
+        * state         状态(类似于组件的data)
+        * getters       处理state(类似于组件的computed)
+        * mutations     修改state的唯一方式(理解为组件中的methods)
