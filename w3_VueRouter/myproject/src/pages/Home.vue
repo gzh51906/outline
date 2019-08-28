@@ -2,23 +2,22 @@
   <div class="home">
     <el-carousel height="150px" class="recommend">
       <el-carousel-item v-for="item in recommend" :key="item.goods_id">
-        <img :src="item.goods_image" @click="goto('goods',item.goods_id)"/>
+        <img :src="item.goods_image" @click="goto(item.goods_id)"/>
       </el-carousel-item>
     </el-carousel>
-    <template v-for="type in goodslist">
-    <h2 :key="type.title">{{type.title}}</h2>
-    <el-row :gutter="20" class="goodslist" :key="type.title">
-        <el-col :span="12" v-for="item in type.item" :key="item.goods_id">
-            <img :src="item.goods_image"/>
-            <h4>{{item.goods_name}}</h4>
-            <p class="price"><del>{{item.goods_price}}</del><span>{{item.goods_promotion_price}}</span></p>
-        </el-col>
-    </el-row>
-    </template>
+    <div v-for="type in goodslist" :key="type.title">
+        <h2>{{type.title}}</h2>
+        <el-row :gutter="20" class="goodslist">
+            <el-col :span="12" v-for="item in type.item" :key="item.goods_id" @click.native="goto(item.goods_id)">
+                <img :src="item.goods_image"/>
+                <h4>{{item.goods_name}}</h4>
+                <p class="price"><del>{{item.goods_price}}</del><span>{{item.goods_promotion_price}}</span></p>
+            </el-col>
+        </el-row>
+    </div>
   </div>
 </template>
 <script>
-import axios from 'axios';
 
 export default {
     data(){
@@ -28,10 +27,10 @@ export default {
         }
     },
     methods:{
-        goto(name,id){
+        goto(id){
             // this.$router.push({name,query:{id:123}})
             // this.$router.push({path:'/goods/123'})
-            this.$router.push({name,params:{id}})
+            this.$router.push({name:'goods',params:{id}})
         }
     },
     async created(){
@@ -45,7 +44,7 @@ export default {
         //     this.recommend = data.datas[1].goods.item.slice(0,4)
         // })
 
-        let {data} = await axios.get('https://www.nanshig.com/mobile/index.php',{
+        let {data} = await this.$nanshig({
             params:{
                 act:'index'
             }
@@ -58,7 +57,11 @@ export default {
         });
 
         // [{goods:{item,title}},{goods:{item,title}}] -> [{item,title},{item,title}]
+    },
+    destroyed(){
+        console.log('home destroyed')
     }
+    
 };
 </script>
 <style>

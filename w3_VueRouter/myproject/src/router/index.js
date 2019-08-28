@@ -32,7 +32,13 @@ let router = new VueRouter({
     }, {
         name: 'cart',
         path: '/cart',
-        component: Cart
+        component: Cart,
+
+        // 路由独享的守卫
+        // beforeEnter(to,from,next){
+        //     console.log('beforeEnter',to,from);
+        //     next()
+        // }
     }, {
         name: 'login',
         path: '/login',
@@ -41,7 +47,7 @@ let router = new VueRouter({
         name: 'mine',
         path: '/mine',
         component: Mine,
-        
+
         // 定义组件时传参
         // props:{a:100,b:200}, //等效于<Mine v-bind="{a:100,b:200}"/> => <Mine v-bind:a="100" v-bind:b="200"/>
         // props:true, // 等效于<Mine v-bind="$route.params"/>
@@ -61,5 +67,18 @@ let router = new VueRouter({
         component: Goods
     }]
 });
+
+// 路由拦截
+router.beforeEach(function(to,from,next){
+    console.log('beforeEach',to,from);
+    // if(已登录)
+    next();
+
+    // else
+    // next({
+        // path:'/login',
+        // query:{target:to.fullPath}
+    // })
+})
 
 export default router;

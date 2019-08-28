@@ -177,3 +177,75 @@
 * axios
     * axios是一个封装了XMLHttpRequest和Promise的ajax请求工具
     * 格式化数据
+
+## day3-3
+
+### 面试题
+*  Vue全家桶：Vue+VueCLI(webpack+Babel)+VueRouter+Vuex+axios
+* SPA
+    * hash
+    * history
+* 组件
+    * 为什么用
+        * 复用
+        * 维护方便
+    * 定义
+        * 全局
+            * template:'#header' -> render
+        * 局部
+            * template:'<div></div>' -> render
+        * 单文件组件
+            * `*.vue`
+    * 使用
+    * 通讯
+        * 父->子：props
+        * 子->父：自定义事件系统
+        * 兄弟
+        * 深层次组件
+        * 路由
+* 构建版本
+    * UMD       完整版本
+    * cjs       commonJS
+    * esm       ESModule
+    * runtime   运行时
+
+### 复习
+* 路由使用
+    1. 引入
+    2. 安装Vue.use()
+    3. 实例化并配置参数（路由记录）
+    4. 注入根实例
+    5. 使用
+* 路由显示
+    <router-view/>
+* 路由导航
+    * 声明式    <router-link/>
+    * 编程式
+        * $router
+        * $route
+
+* 路由传参
+    * 定义时传参
+        * props
+    * 跳转时传参
+        * query
+        * params
+            * 只支持name方式跳转时传参
+            * 动态路由
+
+### 知识点
+* 动态路由
+    * 商品间的切换，Goods使用`复用规则`（不销毁不重建）
+* 路由守卫
+    * 全局路由守卫
+        > 路由实例的方法，写在配置文件中
+        * router.beforeEach()
+        * router.afterEach()
+    * 路由独享的守卫
+        > 写在路由配置中的守卫
+        * beforeEnter
+    * 组件内的守卫：
+        > 写在组件内的守卫（VueRouter针对组件添加的生命周期函数）
+        * beforeRouteEnter  进入路由前执行
+        * beforeRouteUpdate 路由更新时执行
+        * beforeRouteLeave  离开当前路由时执行
