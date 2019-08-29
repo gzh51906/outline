@@ -265,3 +265,67 @@
         * state         状态(类似于组件的data)
         * getters       处理state(类似于组件的computed)
         * mutations     修改state的唯一方式(理解为组件中的methods)
+
+## day3-4
+
+### 面试题
+* 路由模式mode
+    * hash
+    * history
+* 路由传参方式
+    * params
+    * query
+    * props
+* 路由跳转过程中，组件声明周期如何执行
+    * 激活组件  重建
+    * 失活组件  销毁
+    * 路由跳转过程中不经历重建与销毁过程
+        * 动态路由
+        * keep-alive
+
+### 复习
+* 动态路由
+    * 监听动态路由的改变
+        * watch
+        * beforeRouteUpdate
+* 路由守卫
+    * 全局
+        * router.beforeEach(to,from,next)
+        * router.afterEach(to,from)
+    * 路由独享
+        beforeEnter(to,from,next)
+    * 组件内
+        * beforeRouteEnter(to,from,next)
+        * beforeRouteUpdate(to,from,next)   复用组件才会执行
+            * $route
+        * beforeRouteLeave(to,from,next)
+* 完整路由跳转过程
+    * 11步
+
+* Vuex
+    * 核心概念 
+        * store
+            * state         data
+            * getters       computed
+            * mutations     methods
+                * 调用方式：store.commit()
+    * 使用
+        1. 实例化store
+        2. 注入store
+        3. 使用this.$store
+    * Vuex解决的问题
+        * 数据管理      
+            * 获取  
+                * this.$store.state.xxx
+                * this.$store.getters.xxx
+            * 修改
+                * this.$store.commit('mutation',xxx)
+            * UI更新
+* 嵌套路由
+    * children
+    * 嵌套`<router-view>`
+* 命名路由
+    * `<router-view name="header">`
+    * 配置：components:{header:xxxx}
+
+

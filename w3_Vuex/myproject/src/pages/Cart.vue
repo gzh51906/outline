@@ -3,7 +3,7 @@
     <el-row :gutter="20" v-for="item in cartlist" :key="item.goods_id">
       <el-col :span="16">
         <el-col :span="6">
-            <img :src="item.goods_image"/>
+            <img :src="item.goods_image" @click="goto(item.goods_id)"/>
         </el-col>
         <el-col :span="16" :offset="1">
             <h4>{{item.goods_name}}</h4>
@@ -15,10 +15,23 @@
         <el-button type="text" icon="el-icon-delete" @click="remove(item.goods_id)">删除</el-button>
       </el-col>
     </el-row>
-    <div class="total price">总计：<span>{{totalPrice}}</span></div>
+    <el-row :gutter="50">
+        <el-col :span="12">
+            <el-button type="text" size="mini"  @click="$store.commit('clearCart')">清空购物车</el-button>
+        </el-col>
+        <el-col :span="12">
+            <el-col :span="16" class="total price">
+                总计：<span>{{totalPrice}}</span> 
+            </el-col>
+            <el-col :span="8">
+                <el-button type="danger">结 算</el-button>
+            </el-col>
+        </el-col>
+    </el-row>
   </div>
 </template>
 <script>
+
 export default {
     computed:{
         cartlist(){
@@ -35,6 +48,10 @@ export default {
         changeQty(qty,id){
             // console.log(a,b)
             this.$store.commit('changeQty',{qty,id})
+        },
+        goto(id){
+            // this.$router.push({name:'goods',params:{id}})
+            this.$router.push(`/goods/${id}`)
         }
     },
   created() {

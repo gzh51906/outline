@@ -55,7 +55,28 @@ let router = new VueRouter({
     }, {
         name: 'discover',
         path: '/discover',
-        component: Discover
+        component: Discover,
+
+        // 嵌套路由
+        // children:[
+        //     // 路径为 /discover/shuangzhuang 时，渲染shuangzhuang组件
+        //     {
+        //         name: 'sz',
+        //         path: 'shangzhuang',
+        //         // component: shuangzhuang
+
+        //         // 命名路由
+        //         components:{
+        //             title:shangzhuangTile,
+        //             list:shangzhuang
+        //         }
+        //     },
+        //     {
+        //         name: 'xz',
+        //         path: 'xiazhuang',
+        //         component: xiazhuang
+        //     }
+        // ]
     }, {
         name: 'reg',
         path: '/reg',

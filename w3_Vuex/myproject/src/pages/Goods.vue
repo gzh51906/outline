@@ -64,7 +64,22 @@ export default {
         },
         add2cart(){
             let {goods_image,goods_price,goods_name,goods_id} = this.data
-            this.$store.commit('addItem',{goods_image,goods_price,goods_name,goods_id,qty:1})
+            let {cartlist} = this.$store.state;
+
+            // 判断当前商品是否已经存在购物车
+            // 存在：改变数量
+            // 不存在：添加商品
+            // if(cartlist.some(item=>item.goods_id===goods_id)){
+
+            // }
+            let hasItem = cartlist.filter(function(item){//得到一个数组或空数组
+                return item.goods_id === goods_id
+            })[0]
+            if(hasItem){
+                this.$store.commit('changeQty',{id:goods_id,qty:hasItem.qty+1})
+            }else{
+                this.$store.commit('addItem',{goods_image,goods_price,goods_name,goods_id,qty:1})
+            }
         }
     },
 
