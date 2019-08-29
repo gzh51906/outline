@@ -282,6 +282,24 @@
     * 路由跳转过程中不经历重建与销毁过程
         * 动态路由
         * keep-alive
+* 模块化与组件化开发
+    * 模块化规范有哪些
+        * require.js        AMD
+        * sea.js            CMD
+        * nodejs            CommonJS
+        * ECMAScript2015    ESModule
+            * ES版本呢
+                * ES5
+                * ES6   ECMAScript2015
+                * ES7   ECMAScript2016
+* 虚拟DOM为什么效率会更高
+    * 是一个结构类似与真实DOM节点的对象，在内存中运行
+    * 对节点操作进行优化
+    * 对事件进行优化
+    * 局部更新
+* hash路由和history路由的底层原理
+    * 不用VueRouter如何实现相同效果
+    * 原理：window.onhashchange事件
 
 ### 复习
 * 动态路由
@@ -327,5 +345,13 @@
 * 命名路由
     * `<router-view name="header">`
     * 配置：components:{header:xxxx}
+
+* hash路由的底层原理
+    * 不用VueRouter如何实现相同效果
+    * 原理：window.onhashchange事件
+* history路由的底层原理
+    * HTML5新特性（对history对象的增强）
+        * pushState()
+        * replaceState()
 
 

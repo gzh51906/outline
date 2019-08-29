@@ -17,6 +17,40 @@ Router.post('/reg',async (req,res)=>{
     }
 })
 
+// 验证用户名是否存在
+Router.get('/check',async (req,res)=>{
+    let {username} = req.query;
+    let data
+    try{
+        data = await find('user',{username});//{username,password,age,gender}
+        data = data[0];
+        if(data){
+            res.send(formatData({code:0}))
+        }else{
+            res.send(formatData())
+        }
+    }catch(err){
+        res.send(formatData({code:0}))
+    }
+})
+
+Router.post('/login',async (req,res)=>{
+    let {username,password} = req.body;
+    let data
+    try{
+        data = await find('user',{username,password});//{username,password,age,gender}
+        console.log('data',data)
+        data = data[0]
+        if(data){
+            res.send(formatData({data:{_id:data._id,username:data.username}}))
+        }else{
+            res.send(formatData({code:0}))
+        }
+    }catch(err){
+        res.send(formatData({code:0}))
+    }
+})
+
 // 删
 Router.delete('/:id',(req,res)=>{
     let {id} = req.params;

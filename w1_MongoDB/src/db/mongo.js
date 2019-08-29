@@ -84,7 +84,7 @@ exports.update = async (colName,query,data)=>{
         query._id = ObjectId(query._id);
     }
 
-    let result = collection.find(query);
+    let result = collection.find(query);console.log('result:',result)
 
     // 筛选
     if(sort){

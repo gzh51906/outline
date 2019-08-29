@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>17.hash路由的原理</title>
+</head>
+<body>
+    <h1>17.hash路由的原理</h1>
+    <a href="#/abc">ABC</a>
+    <a href="#/nba">NBA</a>
+    <a href="#/cba">CBA</a>
+    <div id="app"></div>
+    <script>
+        /**
+            17.hash路由的原理
+                * window.onhashchange
+        */
+
+        let router = {
+            abc:{
+                template:"<div>ABCDEFG</div>"
+            },
+            nba:{
+                template:"<div>美国篮球</div>"
+            },
+            cba:{
+                template:"<div>中国篮球</div>"
+            }
+        }
+
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            render()
+        })
+
+        window.onhashchange = function(){
+            render();
+        }
+
+        function render(){
+            let hash = location.hash;//#xxx
+            hash = hash.substring(2);//substr(start,length),slice(start,end)
+            console.log(hash)
+            document.getElementById('app').innerHTML = router[hash].template;
+        }
+    </script>
+</body>
+</html>
