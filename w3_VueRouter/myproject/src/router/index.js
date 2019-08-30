@@ -34,6 +34,9 @@ let router = new VueRouter({
         path: '/cart',
         component: Cart,
 
+        // 路由元信息
+        meta: { requiresAuth: true }
+
         // 路由独享的守卫
         // beforeEnter(to,from,next){
         //     console.log('beforeEnter',to,from);
@@ -47,6 +50,8 @@ let router = new VueRouter({
         name: 'mine',
         path: '/mine',
         component: Mine,
+
+        meta: { requiresAuth: true }
 
         // 定义组件时传参
         // props:{a:100,b:200}, //等效于<Mine v-bind="{a:100,b:200}"/> => <Mine v-bind:a="100" v-bind:b="200"/>

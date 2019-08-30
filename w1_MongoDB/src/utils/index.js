@@ -13,3 +13,15 @@ exports.formatData = function formData({code=1,data=[],msg='success'}={}){
     }
 }
 
+const {create,verify} = require('./token');
+
+exports.token = {create,verify}
+
+// {
+//     formatData,
+//     token:{
+//         create,
+//         verify
+//     }
+// }
+

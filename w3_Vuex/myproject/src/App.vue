@@ -24,7 +24,7 @@
         </el-menu>
       </el-col>
       <el-col :span="5" :offset="1">
-        <el-row>
+        <el-row v-if="logined">
           <el-col :span="12" @click.native="goto('reg')">
             <i class="el-icon-s-custom"></i>
             注册
@@ -32,6 +32,11 @@
           <el-col :span="12" @click.native="goto('login')">
             <i class="el-icon-user"></i>
             登录
+          </el-col>
+        </el-row>
+        <el-row v-else>
+          <el-col :span="12" :offset="12">
+            <el-button type="text" icon="el-icon-switch-button" @click="logout">退出</el-button>
           </el-col>
         </el-row>
       </el-col>
@@ -83,7 +88,14 @@ export default {
   },
   computed:{
     cartlenth(){
-      return this.$store.state.cartlist.length;
+      // return this.$store.state.cartlist.length;
+
+      // 模块化后：
+      console.log(this.$store)
+      return this.$store.state.cart.cartlist.length;
+    },
+    logined(){
+      return !this.$store.state.common.authorization;//''->false
     }
   },
   methods: {
@@ -93,6 +105,16 @@ export default {
     },
     goto(path){
       this.$router.push({path})
+    },
+    logout(){
+      this.$store.commit('logout');
+
+      if(this.$route.meta.requiresAuth){
+        this.$router.push({
+          path:'/login',
+          query:{targetUrl:this.$route.fullPath}
+        })
+      }
     }
   },
   created() {

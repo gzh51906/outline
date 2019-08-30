@@ -339,13 +339,14 @@
             * 修改
                 * this.$store.commit('mutation',xxx)
             * UI更新
+### 知识点
+
 * 嵌套路由
     * children
     * 嵌套`<router-view>`
 * 命名路由
     * `<router-view name="header">`
     * 配置：components:{header:xxxx}
-
 * hash路由的底层原理
     * 不用VueRouter如何实现相同效果
     * 原理：window.onhashchange事件
@@ -353,5 +354,32 @@
     * HTML5新特性（对history对象的增强）
         * pushState()
         * replaceState()
+
+## day3-5
+
+### 面试题
+* 如何实现QQ或者微信同类型设备不能同时登录的效果
+    * 会自动下线之前的设备
+        * websocket
+        * 轮询
+* hash路由的原理
+    * window.onhashchange
+* 单页面应用SPA与多页面应用MPA
+* 上线
+    * 编译
+
+### 知识点
+* 用户登录状态保留
+    * token 令牌（就是一个加密后的字符串）
+        * 生成：用户第一次使用用户名和密码登录成功后，后端生成并返回给前端保存
+        * 校验：
+            * 是否被伪造
+            * 是否过期
+* 路由拦截
+    * 利用全局路由守卫（beforeEach）实现拦截
+    * 鉴权：必须有登录权限才能访问到某个页面
+
+* 响应拦截
+    * 
 
 

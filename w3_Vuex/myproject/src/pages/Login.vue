@@ -61,11 +61,11 @@ export default {
                 password:this.ruleForm.pass
             });
             if(data.code === 1){
-                if(this.$route.query.target){
-                    this.$router.push(target);
-                }else{
-                    this.$router.push('/mine');
-                }
+              let targetUrl = this.$route.query.targetUrl || '/mine'
+              this.$router.push(targetUrl);
+
+                // 保存token到本地
+                this.$store.commit('login',data.data.authorization)
             }else{
                 alert('用户名或密码错误')
             }

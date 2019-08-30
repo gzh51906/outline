@@ -1,4 +1,7 @@
 import Vue from 'vue';
+import axios from 'axios';
+
+
 
 import Home from '../pages/Home.vue'
 import Cart from '../pages/Cart.vue'
@@ -34,6 +37,8 @@ let router = new VueRouter({
         path: '/cart',
         component: Cart,
 
+        meta: { requiresAuth: true }
+
         // 路由独享的守卫
         // beforeEnter(to,from,next){
         //     console.log('beforeEnter',to,from);
@@ -47,6 +52,8 @@ let router = new VueRouter({
         name: 'mine',
         path: '/mine',
         component: Mine,
+
+        meta: { requiresAuth: true }
 
         // 定义组件时传参
         // props:{a:100,b:200}, //等效于<Mine v-bind="{a:100,b:200}"/> => <Mine v-bind:a="100" v-bind:b="200"/>
@@ -75,6 +82,8 @@ let router = new VueRouter({
         //         name: 'xz',
         //         path: 'xiazhuang',
         //         component: xiazhuang
+
+                    // meta:{requiresAuth:true}
         //     }
         // ]
     }, {
@@ -91,15 +100,55 @@ let router = new VueRouter({
 
 // 路由拦截
 router.beforeEach(function(to,from,next){
-    console.log('beforeEach',to,from);
-    // if(已登录)
-    next();
+    console.log('beforeEach',to);
 
-    // else
-    // next({
-        // path:'/login',
-        // query:{target:to.fullPath}
-    // })
+    // 判断目标路由是否需要登录权限
+    // if(to.meta.requiresAuth){
+    if(to.matched.some(item=>item.meta.requiresAuth)){
+        // 判断是否已登录
+        let authorization = localStorage.getItem('Authorization');
+        if(authorization){
+            // 发起校验
+            axios.get('http://localhost:1906/verify',{
+                headers:{
+                    Authorization:authorization
+                }
+            }).then(res=>{
+                window.console.log('then',res)
+            })
+            next();
+        }else{
+            next({
+                path:'/login',
+                query:{targetUrl:to.fullPath}
+            })
+        }
+    }else{
+        next();
+    }
+
+    
+    
+
+    
 })
+
+
+// 响应拦截
+axios.interceptors.response.use(function (res) {
+    // Do something with response data
+    // {data:{
+    //     code:1,
+    //     data:{authorization}
+    // }}
+    if(res.data.data.authorization === false){
+        router.push('/login')
+    }
+
+    return res;
+  }, function (error) {
+    // Do something with response error
+    return Promise.reject(error);
+  });
 
 export default router;

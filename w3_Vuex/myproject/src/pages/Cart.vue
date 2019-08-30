@@ -35,7 +35,7 @@
 export default {
     computed:{
         cartlist(){
-            return this.$store.state.cartlist
+            return this.$store.state.cart.cartlist
         },
         totalPrice(){
             return this.$store.getters.totalPrice.toFixed(2)

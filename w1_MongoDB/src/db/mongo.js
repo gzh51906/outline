@@ -1,4 +1,4 @@
-const mongodb = require('mongodb');console.dir(mongodb)
+const mongodb = require('mongodb');
 
 const {DBurl,DBname} = require('../config.json');
 
@@ -84,7 +84,7 @@ exports.update = async (colName,query,data)=>{
         query._id = ObjectId(query._id);
     }
 
-    let result = collection.find(query);console.log('result:',result)
+    let result = collection.find(query);
 
     // 筛选
     if(sort){

@@ -2,6 +2,8 @@ const express = require('express');
 
 const Router = express.Router();
 
+const {token,formatData} = require('../utils');
+
 // 引入路由文件
 const goodsRouter = require('./goods');
 const userRouter = require('./user');
@@ -26,6 +28,19 @@ Router.use((req,res,next)=>{
 // 商品
 Router.use('/goods',goodsRouter);
 Router.use('/user',userRouter);
+Router.get('/verify',(req,res)=>{
+    // 获取前端传入的token
+    // 对token进行校验
+    let authorization = req.header('Authorization');
+
+    let result = token.verify(authorization);
+    if(result){
+        res.send(formatData({data:{authorization:true}}))
+    }else{
+        res.send(formatData({code:0,data:{authorization:false}}))
+    }
+    
+});
 
 
 module.exports = Router;

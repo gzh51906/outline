@@ -3,7 +3,7 @@ const express = require('express');
 const Router = express.Router();
 
 const {insert,remove,find} = require('../db/mongo');
-const {formatData} = require('../utils')
+const {formatData,token} = require('../utils')
 
 // 增：注册用户
 Router.post('/reg',async (req,res)=>{
@@ -39,10 +39,13 @@ Router.post('/login',async (req,res)=>{
     let data
     try{
         data = await find('user',{username,password});//{username,password,age,gender}
-        console.log('data',data)
+        
         data = data[0]
+
+        // 生成token，并返回前端
+        let authorization = token.create(username);
         if(data){
-            res.send(formatData({data:{_id:data._id,username:data.username}}))
+            res.send(formatData({data:{_id:data._id,username:data.username,authorization}}))
         }else{
             res.send(formatData({code:0}))
         }
