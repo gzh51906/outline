@@ -369,6 +369,12 @@
     * 编译
 
 ### 知识点
+* session & token & cookie
+    * cookie：客户端存储技术
+        * 自动发送给服务器
+    * session: 服务器版cookie
+    * token：令牌
+
 * 用户登录状态保留
     * token 令牌（就是一个加密后的字符串）
         * 生成：用户第一次使用用户名和密码登录成功后，后端生成并返回给前端保存
@@ -382,4 +388,76 @@
 * 响应拦截
     * 
 
+* 知识点梳理
+    * token
+        * 什么是token
+        * 应用场景
+        * 如何使用（在服务端完成）
+            * 创建
+            * 校验
+            * 使用步骤
+                1. 用户在客户端使用用户名密码第一次登录
+                2. 后端验证用户名密码成功后，创建一个token，并返回前端
+                    * jsonwebtoken.sign({data},secret,{expires})
+                3. 客户端接收到token后保存在本地存储
+                4. 在需要权限才能访问的页面把token发送给后端进行校验，根据服务器校验结果确定是否允许访问目标页面
+    * 路由拦截
+        * beforeEach全局守卫
+            * 校验用户是否已登录：判断本地存储中是否存在token
+            * 校验用登录是否过期，或token是否被伪造：发起请求到后端进行校验
+    * 完成的请求过程
+        1. 客户端发起请求
+        * 请求拦截
+        2. 服务器接收到请求，并响应数据
+        * 响应拦截
+        3. 客户端接收到相应数据
 
+    * 响应拦截
+        * 使用：axios.interceptors.response
+        * 应用场景
+            * token校验
+            * 数据格式化
+            * 关闭loading
+    * 请求拦截
+        * 使用：axios.interceptors.request
+        * 应用场景：
+            * 显示loading
+            * 发送全局数据
+                * token
+                * 用户标识
+                * ...
+    * VueX
+        * store
+            * state
+            * getters
+            * mutations
+                * 调用：store.commit('mutation',参数)
+            * actions   类似于mutations
+                * 不使用actions的做法
+                    1. 组件内发起ajax请求
+                    2. 数据回来后调用store.commit('mutation')
+                * 调用：store.dispatch('action',参数)
+                    * dispacth -> action(ajax) -> commit -> mutation -> state
+        * store模块
+            * modules   影响state的获取：store.state.xxx -> store.state.cart.xxx
+                * cart
+                * common
+        * Vuex映射：简化操作的作用
+            * state & getters 映射到组件的computed
+            * mutations & actions 映射到组件的methods
+
+* git分支操作
+    * 公共分支
+        * master    专人管理，其他人不能改
+        * dev       开发分支，每个人都可以修改
+    * 私有分支
+        * 每个人自己创建一个独立分支，不需要传到github
+    * 操作流程
+        * 每天在私有分支上传编写代码，需要给其他成员使用时，把代码合并到dev分支
+        * 合并步骤: git merge
+            1. 切换到需要合并的分支：dev
+            2. git merge laoxie : 把laoxie分支合并到当前分支
+            3. 推送dev分支到github
+            4. 其他成员拉取dev分支内容: git pull origin dev
+            5. 其他成员把dev分支内容合并到私有分支：git merge dev
+        

@@ -29,7 +29,11 @@ const {formatData} = require('../utils');
 // });
 
 
- 
+// 库存信息
+Router.get('/kucun',(req,res)=>{console.log(123456)
+    let kc = Math.ceil(Math.random()*10);
+    res.send(formatData({data:10}))
+});
 
 // 商品的增删改查
 Router.post('/',(req,res)=>{
@@ -134,6 +138,9 @@ Router.route('/:id')
 
     res.send(result)
 });
+
+
+
 
 
 

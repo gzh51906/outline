@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
     state:{
         cartlist:[{
@@ -30,7 +32,7 @@ export default {
         removeItem(state,id){
             state.cartlist = state.cartlist.filter(item=>item.goods_id!=id);
         },
-        changeQty(state,{qty,id}){
+        changeQty(state,{qty,id}){console.log('changeQty:',qty,id)
             state.cartlist = state.cartlist.map(item=>{
                 if(item.goods_id === id){
                     item.qty = qty;
@@ -40,6 +42,23 @@ export default {
         },
         clearCart(state){
             state.cartlist = []
+        }
+    },
+    actions:{
+        changeQtyAsync(context,{id,qty}){
+            // context：类似与store
+            console.log('changeQtyAsync:',qty,id)
+            // 需要向服务器获取库存信息，再修改数量
+            axios.get('http://localhost:1906/goods/kucun').then(({data})=>{
+                let kucun = data.data;
+                // 库存不足
+                if(qty>kucun){
+                    qty = kucun;
+                }
+                context.commit('changeQty',{id,qty})
+            })
+
+            return qty;
         }
     }
 }

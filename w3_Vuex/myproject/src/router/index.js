@@ -134,21 +134,4 @@ router.beforeEach(function(to,from,next){
 })
 
 
-// 响应拦截
-axios.interceptors.response.use(function (res) {
-    // Do something with response data
-    // {data:{
-    //     code:1,
-    //     data:{authorization}
-    // }}
-    if(res.data.data.authorization === false){
-        router.push('/login')
-    }
-
-    return res;
-  }, function (error) {
-    // Do something with response error
-    return Promise.reject(error);
-  });
-
 export default router;

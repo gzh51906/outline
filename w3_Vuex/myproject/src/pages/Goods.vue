@@ -64,7 +64,7 @@ export default {
         },
         add2cart(){
             let {goods_image,goods_price,goods_name,goods_id} = this.data
-            let {cartlist} = this.$store.state;
+            let {cartlist} = this.$store.state.cart;
 
             // 判断当前商品是否已经存在购物车
             // 存在：改变数量
