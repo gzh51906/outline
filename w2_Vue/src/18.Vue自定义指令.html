@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>18.Vue自定义指令</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+    <style>
+        [v-cloak]{display: none;}
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>18.Vue自定义指令</h1>
+        <div id="app">
+            <h4>内置指令</h4>
+           {{msg}}
+           <p v-text="msg" v-once></p>
+           <p v-once>{{msg}}</p>
+           <p v-bind:mymsg="msg" v-once></p>
+
+           <h4 v-pre>{{msg}}</h4>
+           <h2 v-cloak>{{msg}}</h2>
+
+           <h4>自定义指令</h4>
+           <input type="text" v-laoxie:test.jingjing.dingding="msg"/>
+        </div>
+    </div>
+    <script>
+        /**
+            18.Vue自定义指令
+            * 指令完整格式：v-指令名:参数.修饰符="值"
+            * 内置指令    
+                * v-once：只给当前元素绑定一次数据
+                * v-pre：跳过这个元素和它的子元素的编译过程
+                * v-cloak：一致显示在元素上，直到数据挂载完毕
+                    * 
+            * 自定指令
+                * 全局指令：Vue.directive(name,option)
+                * 局部指令：directives
+                * 指令生命周期函数（钩子函数）
+                    * bind
+                    * inserted
+                    * update
+                
+        */
+
+        // v-laoxie：输入框自动获得焦点指令
+        Vue.directive('laoxie',{
+            // 初始化时执行
+            bind(el,binding,vnode){
+                // el：指令所在的元素
+                // binding: 一个对象，指令的所有信息
+                console.log('bind:',el,binding,vnode)
+
+            },
+            inserted(el,binding,vnode){
+                // inserted与bind的区别
+                el.focus();
+
+            },
+            update(){
+                
+            }
+        })
+        
+        let vm = new Vue({
+            // el:'#app',
+            data:{
+                msg:'hello laoxie'
+            }
+        })
+
+        setTimeout(()=>{
+            vm.$mount('#app')
+        },200)
+    </script>
+</body>
+
+</html>
