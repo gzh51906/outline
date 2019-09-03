@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>20.mixin</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>20.mixin</h1>
+        <div id="app">
+            {{name}}     <button @click="upperCase">大写</button>
+            <laoxie></laoxie>
+            <jingjing></jingjing>
+        </div>
+    </div>
+    <script>
+        /**
+            20.mixin：以一定的合并规则混入到组件中
+                * 全局：Vue.mixin(options)
+                * 局部：mixins
+                
+        */
+
+        // 影响后面创建的所有实例/组件（慎用）
+        // Vue.mixin({
+        //     methods:{
+        //         upperCase(){
+        //             this.name = this.name.toUpperCase();
+        //         }
+        //     },
+        //     mounted(){
+        //         console.log('mounted:',this.name)
+        //     }
+        // })
+
+        let myMixin = {
+            methods:{
+                upperCase(){
+                    this.name = this.name.toUpperCase();
+                }
+            }
+        }
+        
+
+        Vue.component('laoxie',{
+            data(){
+                return {
+                    name:'laoxie'
+                }
+            },
+            template:`<div>用户名：{{name}} <button @click="upperCase">大写</button></div>`,
+            mixins:[myMixin]
+        });
+
+        
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                name:'html5-1906'
+            },
+            components:{
+                jingjing:{
+                    data(){
+                        return {
+                            name:'jingjing'
+                        }
+                    },
+                    mixins:[myMixin],
+                    template:`<div>用户名：{{name}} <button @click="upperCase">大写</button></div>`
+                }
+            },
+            mounted(){
+                console.log('原来的mounted',this)
+            },
+            methods:{
+                upperCase2(){
+                    this.name = this.name[0].toUpperCase() + this.name.slice(1)
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+
+</html>

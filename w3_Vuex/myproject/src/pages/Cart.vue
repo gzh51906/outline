@@ -33,7 +33,10 @@
 <script>
 import {mapState,mapGetters,mapMutations,mapActions} from 'vuex';
 
+import mymixin from '../mixins'
+
 export default {
+    // mixins:[mymixin,commonMixins],
     computed:{
         // cartlist(){
         //     return this.$store.state.cart.cartlist

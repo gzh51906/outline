@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>19.过滤器</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>19.过滤器</h1>
+        <div id="app">
+            <!-- 多个过滤器：add(upper(name)) -->
+            <p>商品名称：{{name | upper | add}}</p>
+            <p>价格：{{price | amount}}</p>
+        </div>
+    </div>
+    <script>
+        /**
+            19.过滤器
+                * 定义
+                    * 全局过滤器：Vue.filter()
+                    * 局部过滤器：filters
+                * 使用
+                    * {{name | upper}}
+        */
+
+        Vue.filter('upper',function(val,szmdx){
+            // val为默认传入的值，如过滤器有参数则在后面的参数传入
+            // 这里的返回值就是使用过滤器后得到的值
+
+            // 首字母大写：过滤器传入参数true
+            if(szmdx){
+                let arr = val.split(' ');
+                arr = arr.map(item=>{
+                    return item[0].toUpperCase()+item.slice(1)
+                })
+                return arr.join(' ');
+            }
+            return val.toUpperCase();
+        });
+
+        // 每三位数字添加一个逗号
+        // 100
+        // 1,000 -> 1,000
+        // 10000 -> 10,000
+        // 10000000 -> 10,000,000
+        Vue.filter('amount',function(val){
+            return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        })
+
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                name:'huawei mate30 pro',
+                price: 1115999
+            },
+            computed:{
+                upperName(){
+                    return this.name.toUpperCase();
+                }
+            },
+            filters:{
+                add:function(val){
+                    return val + ' @';
+                }
+            }
+        })
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>21.插件plugin</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="./js/vue.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>21.插件plugin</h1>
+        <div id="app">
+
+        </div>
+    </div>
+    <script>
+        /**
+            21.插件plugin
+
+            * 定义：一系列功能的集合
+                * 对象：{install(){}}
+                * 函数：function(){}
+            * 使用
+                * Vue.use(插件)
+        */
+
+        // 定义插件
+        let myPlugin = {}
+        myPlugin.install = (Vue)=>{
+            // 定义组件
+            Vue.component('laoxie',{
+                data(){
+                    name:'laoxie'
+                },
+                template:'<button>{{name}}</button>'
+            });
+
+            // 过滤器、mixin、指令...
+
+            // 给Vue添加全局方法/原型方式
+            // Vue.prototype.$axios = axios
+            Vue.show = function(){}
+        }
+
+        // 使用（安装）插件
+        Vue.use(myPlugin);
+
+
+        let vm = new Vue({
+            el:'#app'
+        })
+
+
+        
+    </script>
+</body>
+
+</html>
