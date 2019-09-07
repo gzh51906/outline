@@ -7,6 +7,7 @@ const {token,formatData} = require('../utils');
 // 引入路由文件
 const goodsRouter = require('./goods');
 const userRouter = require('./user');
+const uploadRouter = require('./upload');
 
 
 
@@ -41,6 +42,9 @@ Router.get('/verify',(req,res)=>{
     }
     
 });
+
+// 上传文件接口
+Router.use('/upload',uploadRouter)
 
 
 module.exports = Router;

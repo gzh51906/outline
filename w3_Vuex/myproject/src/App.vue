@@ -51,7 +51,15 @@ import Vue from "vue";
 import ElementUI from "element-ui";
 Vue.use(ElementUI);
 
-import "element-ui/lib/theme-chalk/index.css";
+// import "element-ui/lib/theme-chalk/index.css";
+// import upload from 'element-ui/packages/upload'
+// import 'element-ui/lib/upload.css'
+
+import { Row, Col,Menu,MenuItem } from 'element-ui';
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col);
+Vue.component(Menu.name, Menu);
+Vue.component(MenuItem.name, MenuItem);
 
 export default {
   name: "app",
