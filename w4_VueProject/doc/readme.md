@@ -53,3 +53,54 @@
         * ...
     * 数组->伪数组
         * 修改原型对象
+
+* 多久发一次版本
+    * 紧急bug   hotfix
+    * master
+* 如何取消ajax请求
+    * XMLHttpRequest
+        ```js
+            xhr = new XMLHttpRequest();
+            xhr.abort()
+        ```
+    * axios
+    ```js
+        import axios from 'axios';
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();//{token,cancel()}
+
+        axios({
+            url:'xxx',
+            cancelToken: source.token
+        })
+
+        axios.get('xxx',{
+            cancelToken: source.token
+        }),
+        axios.post('xxx',{},{
+            cancelToken: source.token
+        });
+
+        // 取消
+        source.cancel('xxx')
+
+    ```
+    * 取消代码编写位置
+        * 组件销毁阶段
+
+
+## day4-4
+* webapp + 后台管理系统
+
+* Vue-cli
+    * 图片路径问题
+        * 图片会被webpack处理
+            * webpack只会处理相对路径后require()/import的图片
+        * 解决方案
+            * require(url)
+                * url如果是一个变量，则必须使用拼接路径的方式
+            * vue-cli：
+                * 放到public文件夹中
+    * webpack介入时间
+        * 流程：webpack编译 -> js,html,css -> 浏览器解析（Vue介入）
+    
