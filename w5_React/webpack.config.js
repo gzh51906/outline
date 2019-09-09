@@ -1,4 +1,6 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 
 // webpack配置文件（遵循commonjs规范）
 module.exports = {
@@ -17,7 +19,11 @@ module.exports = {
         rules:[
             // 配置文件编译规则（每一种文件必须配置一个loader）
             {
-                test:/\.js$/,
+                test:/\.jsx?$/,
+                
+                // include/exclude包含/排除
+                // exclude:'node_modules',
+                include:path.resolve(__dirname,'./src'),
                 use:{
                     loader:'babel-loader',
                     options:{
@@ -26,6 +32,12 @@ module.exports = {
                 },
                 // 简写
                 //loader:'babel-loader'
+            },
+
+            // css加载器：解析css -> 往html中写入style标签
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
             }
         ]
     },

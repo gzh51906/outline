@@ -24,7 +24,9 @@
 
 * webpack：基于配置的构建工具
     * entry:入口
+    * output:出口
     * devserver:测试服务器
+        * contentBase
     * loader:加载器
         * babel-loader
     * plugins: 插件
@@ -39,3 +41,13 @@
         })
     ```
 
+* Vue 完整MVC架构的框架
+* React 是一个视图层框，MVC中的View
+
+
+* 组件化开发
+    * 组件定义
+        * 函数组件
+        * 类组件
+            * state
+    * 组件通讯
