@@ -51,3 +51,58 @@
         * 类组件
             * state
     * 组件通讯
+        * props
+
+## day5-2
+
+### 面试题
+* webpack的常用配置参数
+    * 脚手架已经配置了所需的webpack参数
+
+
+### 复习
+* React
+    * JSX  : React.createElement()的语法糖
+        * 限制
+            * 关键字无法直接使用
+                * class -> className
+                * for   -> htmlFor
+            * 必须使用驼峰
+                * onclick -> onClick
+                * onkeydown -> onKeyDown
+                * tabindex  -> tabIndex
+                * ...
+            * 必须结束标签
+            * style必须使用对象
+            * js必须写在花括号中
+    * 组件
+        * 函数组件（受控组件、UI组件、无状态组件）
+            * 纯函数
+            * 必须有return值
+        * 类组件（非受控组件、容器组件、状态组件）
+            * state
+            * render
+                * return
+            * this指向
+                * render中this指向组件实例
+                * 事件处理函数：无this
+
+* 构建工具
+    * grunt
+    * gulp
+        * 基于任务
+    * Webpack
+        * 基于配置
+        * 什么时候介入：编译阶段
+        * 常用配置
+            * entry
+            * output
+            * devServer
+                * contentBase
+            * loader：module.rules
+                * babel-loader
+                * css-loader
+                    * style-loader
+                * ...
+            * plugins
+                * html-webpack-plugin
