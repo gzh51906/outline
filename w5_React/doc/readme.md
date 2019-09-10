@@ -58,7 +58,29 @@
 ### 面试题
 * webpack的常用配置参数
     * 脚手架已经配置了所需的webpack参数
+* 事件处理函数内如何判断`事件源对象`与`绑定事件的元素`为同一个元素
+```js
+    btn.onclick = function(e){
+        if(e.target === e.currentTarget){
 
+        }
+    }
+    <button v-on:click="show"></button>
+    <div onClick={show}></div>
+```
+* 函数如何调用自身
+```js
+    function show(){
+        show();//递归调用
+    }
+
+    document.onclick = function test(){
+        // 匿名函数的递归调用
+        arguments.callee();//在严格模式下无法使用
+
+        test();// test()只能在函数内部使用，不能在外部使用
+    }
+```
 
 ### 复习
 * React
@@ -106,3 +128,23 @@
                 * ...
             * plugins
                 * html-webpack-plugin
+
+
+### 知识点
+* 组件通讯
+    * props
+        * 函数组件：通过组件第一个参数获取props
+        * 类组件：通过this.props
+    * 深层次组件通讯
+        * props逐层传递
+            * Context
+            * Redux/Mobx
+    * props数据类型校验
+        * prop-types
+        * 自定义校验规则
+* 事件处理函数
+    * 默认没有this
+        * 通过bind绑定this（建议在constructor初始化时统一操作）
+            * 多次bind只会在第一次生效
+    * event对象
+        * 最后一个参数为event对象
