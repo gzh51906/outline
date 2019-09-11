@@ -477,16 +477,15 @@ React 为每个状态都提供了两种声明周期函数，will 函数在进入
 * componentWillMount 
     >在组件被渲染到页面上之前执行，在组件的整个生命周期内只执行一次
 
-    - 这个时候是做如下操作的好时机：
-        - 发起ajax请求
-        - 设置 setInterval、setTimeout 等计时器操作
-        - 读取本地存储数据
 
 * componentDidMount 
     >组件被渲染到页面上后立马执行，在组件的整个生命周期内只执行一次。
 
     - 这个时候是做如下操作的好时机：
         - 某些依赖组件 DOM 节点的操作
+        - 发起ajax请求
+        - 设置 setInterval、setTimeout 等计时器操作
+        - 读取本地存储数据
 
 * componentWillUpdate(nextProps, nextState)
     >在初始化时不会被调用，可能在以下两种情况下被调用：

@@ -57,7 +57,7 @@ class TodoContent extends Component{
                             value=>{
                                 console.log('value:',value);
                                 return <>
-                                    <TodoButton type="primary" clickHandle={value.completeItem.bind(this,idx)}>完成</TodoButton>
+                                    <TodoB<React.Fragment>utton type="primary" clickHandle={value.completeItem.bind(this,idx)}>完成</TodoButton>
                                     <TodoButton type="danger" clickHandle={value.removeItem.bind(this,idx)}>删除</TodoButton>
                                 </>
                             }

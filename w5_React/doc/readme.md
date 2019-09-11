@@ -151,6 +151,23 @@
 
 ## day5-3
 
+### 面试题
+* 如何取消ajax请求
+    * 原生js: xhr.abort()
+    * axios： 
+        * 标识请求：token
+        * 取消请求：token.cancel()
+* BSR与SSR是什么
+    BSR：在浏览器输入地址-> 服务器返回html(空html) -> 浏览器解析html->请求src,href,ajax...->返回数据->渲染（完整html结构）
+        * 缺点：
+            * 不能SEO
+            * 速度较慢
+    SSR：首屏优化
+        在浏览器输入地址 -> 服务器返回html（完整）
+        Vue: nuxt.js
+* Vue中哪个生命周期函数最先获取到父组件传入的props
+    * created
+
 ### 复习
 * 组件化
     * 组件通讯
@@ -203,3 +220,27 @@
                 ```
 * 内容传输
     * props.children
+
+* `<React.Fragment>`
+    * 简写 `<></>`
+    * 对应原生js: document.createDocumentFragment()
+
+* 生命周期
+    > 生命周期函数中的this指向实例
+    * Mounting：已插入真实 DOM
+        * componentWillMount
+        * componentDidMount
+    * Updating：正在被重新渲染
+        * componentWillUpdate
+        * componentDidUpdate
+    * Unmounting：已移出真实 DOM
+        * componentWillUnmount
+    * 特殊生命周期函数
+        * componentWillReceiveProps
+        * shouldComponentUpdate 一般用于性能优化
+
+* 强制刷新组件
+    * Vue: this.$forceUpdate()
+    * React: this.forceUpdate()
+
+

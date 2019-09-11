@@ -4,6 +4,8 @@ import Card from './components/Card'
 
 import TodoList from './components/TodoList'
 
+import Lifecycle from './components/Lifecycle'
+
 // 函数组件：纯函数
 // function App(){
 //     return <div>
@@ -79,7 +81,9 @@ class App extends React.Component{
             <button onClick={this.handleNext.bind(this)}>下一张</button>
             <Card data={cards[active]}/>
 
-            <TodoList/>
+            {/* <TodoList/> */}
+
+            <Lifecycle active={active}/>
         </div>
     }
 }
