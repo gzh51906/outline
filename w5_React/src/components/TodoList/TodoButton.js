@@ -8,4 +8,9 @@ import { Button } from 'antd';
 
 // export default TodoButton;
 
-export const TodoButton = ()=><Button type="primary">点我</Button>
+export const TodoButton = ({type,clickHandle,children})=>{
+    console.log(children, React.Children)
+    return (
+        <Button type={type} onClick={clickHandle}>{children}</Button>
+    )
+}

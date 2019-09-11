@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import TodoForm from './TodoForm';
 import TodoContent from './TodoContent';
 
+import MyContext from './MyContext'
+
 class TodoList extends Component{
     constructor(){
         super();
@@ -57,7 +59,7 @@ class TodoList extends Component{
     }
 
     // 修改
-    completeItem(idx){
+    completeItem(idx){console.log('complete:',idx)
         let data = this.state.data.map((item,i)=>{
             if(i === idx){
                 item.done = true
@@ -70,17 +72,19 @@ class TodoList extends Component{
     }
 
     render(){
+        let {removeItem,completeItem} = this;
         return (
             <div style={{padding:'15px'}}>
-                <TodoForm addItem={this.addItem}/>
-                <TodoContent 
-                data={this.state.data} 
-                removeItem={this.removeItem}
-                completeItem={this.completeItem}
+                {/* 2. 利用Provider的value属性给子组件提供数据 */}
+                <MyContext.Provider value={{removeItem,completeItem,username:'laoxie'}}>
+                    <TodoForm addItem={this.addItem}/>
+                    <TodoContent 
+                    data={this.state.data} 
 
-                username='laoxie'
-                age={26}
-                />
+                    username='laoxie'
+                    age={26}
+                    />
+                </MyContext.Provider>
             </div>
         )
     }

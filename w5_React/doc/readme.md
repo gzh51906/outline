@@ -148,3 +148,58 @@
             * 多次bind只会在第一次生效
     * event对象
         * 最后一个参数为event对象
+
+## day5-3
+
+### 复习
+* 组件化
+    * 组件通讯
+        * 父->子：props
+            * 函数组件：函数的第一个参数
+            * 类组件：this.props
+                * state
+                * 生命周期函数
+                ...
+            * 数据类型校验: prop-types
+                * 为什么要校验数据类型
+        * 子->父
+            * 通过props传递事件处理函数，在子组件中执行
+        * 深层次组件通讯
+* UI框架
+* 事件处理函数
+    * 默认没有this，所以一般会统一在初始化时（constructor）通过bind改变this指向（bind只认第一次）
+    * event：事件处理函数的最后一个参数
+        * target        触发事件的元素
+        * currentTarget 绑定事件的元素
+
+### 知识点
+* 深层次组件通讯
+    * context
+        1. 在父组件中
+            * 创建context: 
+            ```js
+                const MyContext = React.createContext(defaultValue)
+            ```
+            * 提供context：
+            ```js
+                // 如果不适用Provider，则value值传递defaultvalue
+                <MyContext.Provider value="xx">
+                    //子组件
+                </MyContext.Provider>
+        2. 子组件
+            * 通过consumer获取（推荐）
+                ```js
+                    <MyContext.Consumer>
+                        {
+                            value =>{
+                                // 在函数中获取value值xx
+                            } 
+                        }
+                    </MyContext.Consumer>
+                ```
+            * contextType静态属性获取(简单)
+                ```js
+                    this.context
+                ```
+* 内容传输
+    * props.children
