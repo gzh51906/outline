@@ -163,9 +163,6 @@ React-router4（以下简称RR4）遵循React的设计万物皆组件的理念�
 
 >高阶组件：一个包装函数
 
-* Context（了解，不推荐）
->RR4 在 Router 组件中通过Contex暴露了一个router对象，router对象下包含history（即：this.context.router.history）
-
 #### 路由的Enter与Leave
 
 >相比之前的版本，RR4有了很大的改变，废除了之前版本onEnter、onLeave等路由钩子函数，利用组件生命周期函数来替代

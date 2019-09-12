@@ -244,3 +244,56 @@
     * React: this.forceUpdate()
 
 
+## day5-4
+
+### 面试题
+* RESTful规范的api
+* 不用JSX怎么开发React应用
+    * React.createElement()
+
+
+### 复习
+* 深层次组件通讯
+    * context
+        * 父组件操作
+            1. let MyContext = React.createContext(defaultValue)// 返回一个组件
+            2. <MyContext.Provider value="xx"></MyContext.Provider>
+        * 子组件操作
+            * <MyContext.Consumer>{(value)=>{
+                return <div></div>
+            }}</MyContext.Consumer>
+            * Component.contextType = MyContext
+                * this.context
+
+* 生命周期
+    * 挂载阶段
+        * componentWillMount（不推荐）
+        * componentDidMount
+    * 更新阶段
+        * componentWillUpdate
+        * componentDidUpdate
+    * 销毁阶段
+        * componentWilUnMount
+    * 特殊生命周期函数
+        * componentWillRecivceProps（不推荐）
+        * shouldComponentUpdate(nextProps,nextState)   一般用于性能优化,必须返回boolean
+* ReactRouter
+    * 一切皆组件
+    * 常用组件
+        * HashRouter/BrowserRouter
+        * Route
+            * path
+            * component
+            * exact
+            * render
+        * Redirect
+        * Switch
+
+### 知识点
+* 导航
+    * 声明式导航
+        * NavLink
+    * 编程式导航
+        * 如何获取history
+            * 通过Route组件渲染的组件：props.history
+            * 通过高阶组件withRouter
