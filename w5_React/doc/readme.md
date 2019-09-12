@@ -295,5 +295,30 @@
         * NavLink
     * 编程式导航
         * 如何获取history
-            * 通过Route组件渲染的组件：props.history
-            * 通过高阶组件withRouter
+            * 通过<Route/>组件渲染的组件：props.history
+            * 通过高阶组件withRouter（推荐）
+        * hisotry 跳转
+            * hisotry.push()    跳转产生浏览器记录
+            * hisotry.replace()  跳转但不产生浏览器记录
+        * location 当前路由信息
+            * hash
+            * pathname
+            * search    url参数
+            * state     类似与vueRouter中的params
+        * match
+* 高阶组件HOC（High Order Component）
+    > 高阶组件其实不是一个组件，而是一个函数（包装函数、纯函数）
+    * 使用场景
+        * 操纵props
+    * 注意事项
+        * 不要切断props的传递
+    * 设计模式
+        * 装饰器模式
+
+* webpack
+    * 路径别名alias
+    * 省略后缀名extensions
+
+* 动态路由
+* 嵌套路由
+            

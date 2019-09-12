@@ -16,6 +16,15 @@ module.exports = {
         open:true
     },
 
+    resolve:{
+        // 设置目录别名
+        alias:{
+            '@':path.resolve(__dirname,'./src'),
+            '@@':path.resolve(__dirname,'./src/components'),
+            '~':path.resolve(__dirname,'./src/pages')
+        }
+    },
+
     // 加载器
     module:{
         rules:[
@@ -36,7 +45,8 @@ module.exports = {
                               "libraryDirectory": "es",
                               "style": "css" // `style: true` 会加载 less 文件
                             }],
-                           '@babel/plugin-proposal-class-properties'
+                            ['@babel/plugin-proposal-decorators',{legacy: true}],
+                           '@babel/plugin-proposal-class-properties',
                         ]
                     }
                 },

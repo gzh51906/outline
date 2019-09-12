@@ -6,6 +6,8 @@ import { Menu, Icon } from 'antd';
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Reg from './pages/Reg'
+import Goods from './pages/Goods'
+import List from './pages/List'
 
 class App extends Component {
     // constructor(){
@@ -59,12 +61,20 @@ class App extends Component {
         console.log(this.props)
     }
 
+    componentDidMount(){
+        // let token = localStorage.getItem('Authorization')
+        // this.setState({
+        //     token
+        // })
+    }
+
     render() {
+        console.log('token',this.props.token)
         return (
             <div>
                 {/* {
                     this.state.menu.map(item=>{
-                        return <NavLink to={item.path} activeStyle={{color:'#f00'}}>{item.text}</NavLink>
+                        return <NavLink to={item.path} activeStyle={{color:'#f00'}} replace>{item.text}</NavLink>
                     })
                 } */}
 
@@ -83,11 +93,17 @@ class App extends Component {
                     
 
                 </Menu>
-
+                    
                 <Switch>
                     <Route path="/home" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/reg" component={Reg} />
+                    {/* 动态路由 */}
+                    <Route path="/goods/:id" component={Goods} />
+
+                    {/* 嵌套路由 */}
+                    <Route path="/list" component={List}/>
+
                     <Route path="/notfound" render={() => <div>404</div>} />
                     <Redirect from="/" to="/home" exact />
                     {/* 404 一定要写在最后面*/}
