@@ -35,3 +35,69 @@
     * props修改
     * state修改
     * 强制刷新forceUpdate()
+
+* Redux梳理
+    * 核心概念
+        * store
+            * store.dispatch(action)
+        * reducer
+            * 纯函数
+            * 接收state & action参数
+            * 返回新的State
+        * action
+            * 格式：`{type:'add_to_cart',payload:xxxx}`
+            * 发起action： store.dispacth(action)
+            ```js
+
+            ```
+        
+    * 使用步骤
+        1. 创建store
+        ```js
+            import {createStore} from 'redux';
+
+            let store = createStore(reducer);
+        ```
+        2. 定义Reducer
+        ```js
+            let defaultState = {
+                goodslist:[],
+                totalPrice:0
+            }
+            function reducer(state=defaultState,action){
+                //reducer的任务：修改state，并返回修改后的state
+                switch(action.type){
+                    // store.dispatch({type:'add_to_cart',payload:{id,name,price,qty}})
+                    case 'add_to_cart':
+                        return {
+                            ...state,
+                            goodslist:[action.payload,...state.goodslist]
+                            // 不要直接修改state中的数据：state.goodslist.unshift(action.payload)
+                        }
+                    
+                    default:
+                        return state
+                }
+            }
+        ```
+        3. 操作state
+            * 获取：store.getState()
+            * 修改：store.dispatch(action)
+            * 监听：store.subscribe(fn)
+
+* react-redux
+    * 是一个利用context与高阶组件连接Redux与React组件的工具
+    * 原理：把redux数据作用props传入组件
+    * 使用步骤
+        1. 利用`<Provider/>`组件提供store
+        ```js
+            <Provider store={store}>
+                <HashRouter>
+                    <App/>
+                </HashRouter>
+            </Provider>
+        ```
+        2. 利用高阶组件`connect()()`定义传入组件的props
+            * mapStateToProps
+            * mapDispathToProps
+* 函数柯里化

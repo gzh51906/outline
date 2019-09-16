@@ -1,74 +1,105 @@
 import React,{Component} from 'react';
 
-import {Route,Switch,Redirect,NavLink} from 'react-router-dom';
+import { Route, Redirect, Switch ,withRouter} from 'react-router-dom';
+import { Menu, Icon } from 'antd';
 
 import Home from '~/Home';
 import Mine from '~/Mine';
 import Discover from '~/Discover';
 import Cart from '~/Cart';
 import Goods from '~/Goods';
+import Login from '~/Login'
+import Reg from '~/Reg'
 
-// 引入store
-import store from '@/redux/store';
-
-const allComponent = {
-    Home,
-    Mine,
-    Discover,
-    Cart
-}
-
-class App extends Component{
+class App extends Component {
     state = {
-        menu:[{
-            text:'首页',
-            name:'Home',
-            path:'/home'
-        },{
-            text:'我的',
-            name:'Mine',
-            path:'/mine'
-        },{
-            text:'发现',
-            name:'Discover',
-            path:'/discover'
-        },{
-            text:'购物车',
-            name:'Cart',
-            path:'/cart'
+        current:'/home',
+        menu: [{
+            path: '/home',
+            text: '首页',
+            icon:'home',
+            name: 'home'
+        }, {
+            path: '/discover',
+            text: '发现',
+            icon:'eye',
+            name: 'discover'
+        }, {
+            path: '/cart',
+            text: '购物车',
+            icon:'shopping-cart',
+            name: 'cart'
+        }, {
+            path: '/mine',
+            text: '我的',
+            icon:'user',
+            name: 'mine'
         }]
     }
-    render(){
-        let {menu} = this.state;
 
-        // 获取Reudx数据
-        let data = store.getState();
-        console.log('store:',data);
+
+    goto = (path)=>{
+        // 编程式导航：通过代码实现跳转
+        // 如何获取history
         
+        this.props.history.push(path)
+
+    }
+
+    changeMenu({key}){
+        this.setState({
+            current:key
+        });
+        this.goto(key)
+    }
+
+    componentDidMount(){
+
+    }
+
+    render() {
+
         return (
             <div>
-                <ul>
+                <Menu 
+                onClick={this.changeMenu} 
+                selectedKeys={[this.state.current]} 
+                mode="horizontal">
                     {
-                       menu.map(item=><li key={item.name}>
-                            <NavLink to={item.path} activeStyle={{color:'#f00'}}>{item.text}</NavLink>
-                        </li>)
-                    }
-                </ul>
-                <Switch>
-                    {
-                        menu.map(item=>{
-                            return <Route 
-                            key={item.name}
-                            path={item.path} 
-                            component={allComponent[item.name]}/>
+                        this.state.menu.map(item=>{
+                            return <Menu.Item key={item.path}>
+                                <Icon type={item.icon} />
+                                {item.text}
+                            </Menu.Item>
                         })
                     }
-                    <Route path="/goods/:id" component={Goods}/>
-                    <Redirect from="/" to="/home" exact/>
-                </Switch>
+                    
+
+                </Menu>
+                <div style={{padding:20}}>
+                    <Switch>
+                        <Route path="/home" component={Home} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/reg" component={Reg} />
+                        <Route path="/cart" component={Cart}/>
+                        <Route path="/mine" component={Mine}/>
+                        
+                        {/* 动态路由 */}
+                        <Route path="/goods/:id" component={Goods} />
+
+                        {/* 嵌套路由 */}
+                        <Route path="/discover" component={Discover}/>
+
+                        <Route path="/notfound" render={() => <div>404</div>} />
+                        <Redirect from="/" to="/home" exact />
+                        {/* 404 一定要写在最后面*/}
+                        <Redirect from="*" to="/notfound" />
+                    </Switch>
+                </div> 
             </div>
         )
     }
 }
 
+App = withRouter(App);//返回一个新的组件 
 export default App;
