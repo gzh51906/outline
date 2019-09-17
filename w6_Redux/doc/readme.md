@@ -126,9 +126,22 @@
             * 格式：{type:'xxx'}
             * 发起action
                 * store.dispatch(action)
+    * 常规操作
+        * 定义Reducer
+        * 触发action
+        ```js
+            dispatch(action)
+        ```
 * React-redux
     * 组件：`<Provider/>`
     * 高阶组件：`connect()()`
     * 使用步骤
         1. 利用<Provider/>提供store（原理：context）
         2. 利用`connect()()`高阶组件把store数据通过props传入组件
+
+* 模块化redux
+    * 创建多个独立的reducer
+    * 通过combineReducers()合并成哪一个reducer
+
+* Action Creator
+>封装一个函数，用来生成一个action，目的为了简化操作
