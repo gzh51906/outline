@@ -46,7 +46,7 @@ class App extends Component {
 
     }
 
-    changeMenu({key}){
+    changeMenu = ({key})=>{
         this.setState({
             current:key
         });

@@ -3,7 +3,17 @@ import { createStore } from 'redux';
 // Reducer
 // 初始state
 let defaultState = {
-    goodslist:[],
+    goodslist:[{
+        goods_image:'https://www.nanshig.com/data/upload/shop/store/goods/47/47_06095303389813607_360.jpg',
+        goods_name:'xxxx',
+        goods_price:998,
+        qty:1
+    },{
+        goods_image:'https://www.nanshig.com/data/upload/shop/store/goods/47/47_06095303389813607_360.jpg',
+        goods_name:'ooooo',
+        goods_price:198,
+        qty:5
+    }],
     totalPrice:0
 }
 

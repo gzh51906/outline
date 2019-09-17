@@ -1,14 +1,15 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 
-// import store from '@/redux/store';
+import {List,Avatar,InputNumber,Button,Row, Col} from 'antd';
+import { connect } from 'react-redux';
 
-import {connect} from 'react-redux';
+import '@/style/common.scss';
 
-class Cart extends Component{
+class Cart extends Component {
     state = {
-        totalPrice:0
+        totalPrice: 0
     }
-    changePrice = ()=>{
+    changePrice = () => {
         // 要修改store上的数据，必须通过唯一的方式：dispatch(action)
         // 调用dispatch()后，内部会自动执行reducer
 
@@ -20,7 +21,7 @@ class Cart extends Component{
         // store.dispatch(action);
 
     }
-    componentDidMount(){
+    componentDidMount() {
         // 监听store的修改
         // 只要store中的数据有修改，则执行subscribe中的回掉函数
         // store.subscribe(()=>{
@@ -30,34 +31,55 @@ class Cart extends Component{
         //    })
         // })
 
-        console.log('Cart:',this.props)
+        console.log('Cart:', this.props)
     }
-    render(){
-        // let data = store.getState();
+    changeQty = ()=>{
+
+    }
+    render() {
+        let {goodslist,totalPrice} = this.props;
         return (
             <div>
-                Cart
-                <button onClick={this.changePrice}>修改总价{this.props.totalPrice}</button>
-                <button onClick={()=>{
-                    this.props.dispatch({type:'add_to_cart',payload:{name:'xxx',price:998,qty:1}})
-                }}>添加到购物车</button>
+                <List
+                    itemLayout="horizontal"
+                    dataSource={goodslist}
+                    renderItem={item => (
+                        <List.Item
+                        actions={[<Button size="small" ghost shape="circle" icon="delete" type="danger"></Button>]}
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src={item.goods_image} />}
+                                title={item.goods_name}
+                                description={<div><span className="price"><span>{item.goods_price.toFixed(2)}</span> &times; </span><InputNumber size="small" min={1} max={5} defaultValue={1} onChange={this.changeQty} /></div>}
+                            />
+                        </List.Item>
+                    )}
+                />
+                <Row gutter={20}>
+                    <Col span={12}>
+                        <Button type="danger" size="small" icon="delete">清空购物车</Button>
+                    </Col>
+                    <Col span={12} style={{textAlign:'right'}}>
+                        <div className="price">总价：<span>{totalPrice.toFixed(2)}</span></div>
+                    </Col>
+                </Row>
             </div>
         )
     }
 }
 
-let mapStateToProps = function(state){
+let mapStateToProps = function (state) {
     // 需要映射什么到Cart组件的props就return什么出去
     return {
-        goodslist:state.goodslist,
-        totalPrice:state.goodslist.reduce((prev,item)=>prev+item.price*item.qty,0)
+        goodslist: state.goodslist,
+        totalPrice: state.goodslist.reduce((prev, item) => prev + item.goods_price * item.qty, 0)
     }
 }
 
-let mapDispatchToProps = function(dispatch){
+let mapDispatchToProps = function (dispatch) {
     return {
-        add2cart(){
-            dispatch({type:'add_to_cart',payload:{name:'xxx',price:998,qty:1}})
+        add2cart() {
+            dispatch({ type: 'add_to_cart', payload: { name: 'xxx', price: 998, qty: 1 } })
         }
     }
 }

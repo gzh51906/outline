@@ -101,3 +101,34 @@
             * mapStateToProps
             * mapDispathToProps
 * 函数柯里化
+
+## day6-2
+
+### 复习
+* Redux
+    * 核心
+        * Store
+            * 创建：createStore(reducer)
+            * 方法
+                * dispatch()    修改
+                * getState()    获取
+                * subscribe()   监听
+        * Reducer
+            * 纯函数
+            * 参数
+                * state
+                * action
+            * 操作
+                * 初始化state
+                * 根据action的不同实现相应操作
+                * 返回一个新的state
+        * Action
+            * 格式：{type:'xxx'}
+            * 发起action
+                * store.dispatch(action)
+* React-redux
+    * 组件：`<Provider/>`
+    * 高阶组件：`connect()()`
+    * 使用步骤
+        1. 利用<Provider/>提供store（原理：context）
+        2. 利用`connect()()`高阶组件把store数据通过props传入组件
