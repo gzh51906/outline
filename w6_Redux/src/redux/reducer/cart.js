@@ -1,3 +1,5 @@
+import {ADD_TO_CART,REMOVE_CART,CHANGE_QTY,CLEAR_CART} from '../actions/cart'
+
 // Reducer
 // 初始state
 let defaultState = {
@@ -20,12 +22,7 @@ let defaultState = {
 function reducer(state=defaultState,action){
 
     switch(action.type){
-        case 'change_total_price':
-            return {
-                ...state,
-                totalPrice:action.price
-            }
-        case 'add_to_cart':
+        case ADD_TO_CART:
             return {
                 ...state,
                 goodslist:[action.payload,...state.goodslist]
@@ -33,7 +30,7 @@ function reducer(state=defaultState,action){
             }
 
         // action: {type:'change_qty',goods_id,qty}
-        case 'change_qty':
+        case CHANGE_QTY:
             return {
                 ...state,
                 goodslist:state.goodslist.map(item=>{
@@ -45,14 +42,14 @@ function reducer(state=defaultState,action){
             }
         
         // {type:'remove_cart',goods_id}
-        case 'remove_cart':
+        case REMOVE_CART:
             return {
                 ...state,
                 goodslist:state.goodslist.filter(item=>item.goods_id!=action.goods_id)
             }
         
         // {type:'clear_cart'}
-        case 'clear_cart':
+        case CLEAR_CART:
             return {
                 ...state,
                 goodslist:[]

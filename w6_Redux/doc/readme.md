@@ -139,9 +139,27 @@
         1. 利用<Provider/>提供store（原理：context）
         2. 利用`connect()()`高阶组件把store数据通过props传入组件
 
+### 知识点
 * 模块化redux
     * 创建多个独立的reducer
     * 通过combineReducers()合并成哪一个reducer
 
 * Action Creator
 >封装一个函数，用来生成一个action，目的为了简化操作
+```js
+    dispatch(creator())
+```
+
+## day6-3
+* 在React中写入带html代码的数据
+```jsx
+    <div dangerouslySetInnerHTML = {{__html:'<strong>test</storng>'}}></div>
+```
+
+* redux中间件
+    * 副作用
+    * redux-saga
+        * Generator     生成器函数
+            * 返回一个迭代器
+        * Iterator      迭代器
+            * for...of : 能遍历具有迭代器的数据

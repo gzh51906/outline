@@ -15,6 +15,7 @@ class Cart extends Component {
     // }
     render() {
         console.log(this.props)
+        let mytest = '<strong>laoxie</strong>'
         let { goodslist, totalPrice, clearCart, removeCart, changeQty } = this.props;
         return (
             <div>
@@ -61,7 +62,7 @@ class Cart extends Component {
                         {/* <Button type="danger" size="small" icon="delete" onClick={()=>{
                             dispatch({type:'clear_cart'})
                         }}>清空购物车</Button> */}
-
+                        {/* <span dangerouslySetInnerHTML={{__html: mytest}}></span> */}
                         <Button type="danger" size="small" icon="delete" onClick={clearCart}>清空购物车</Button>
                     </Col>
                     <Col span={12} style={{ textAlign: 'right' }}>
