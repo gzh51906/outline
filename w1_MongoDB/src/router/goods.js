@@ -32,7 +32,10 @@ const {formatData} = require('../utils');
 // 库存信息
 Router.get('/kucun',(req,res)=>{console.log(123456)
     let kc = Math.ceil(Math.random()*10);
-    res.send(formatData({data:10}))
+    setTimeout(()=>{
+        res.send(formatData({data:5}))
+
+    },1000)
 });
 
 // 商品的增删改查

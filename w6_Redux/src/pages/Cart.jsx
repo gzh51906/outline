@@ -47,7 +47,6 @@ class Cart extends Component {
                                     <InputNumber
                                         size="small"
                                         min={1}
-                                        max={5}
                                         value={item.qty}
                                         defaultValue={1}
                                         onChange={changeQty.bind(null, item.goods_id)}
@@ -87,7 +86,9 @@ let mapDispatchToProps = function (dispatch) {
     return {
         changeQty(goods_id, qty) {
             // dispatch({ type: 'change_qty', goods_id, qty })
-            dispatch(changeQty(goods_id,qty))
+            // dispatch(changeQty(goods_id,qty))
+            // dispatch({type:'HELLO_SAGA'})
+            dispatch({type:'CHANGE_QTY_ASYNC', goods_id, qty })
         },
         removeCart(goods_id) {
             // dispatch({ type: 'remove_cart', goods_id });

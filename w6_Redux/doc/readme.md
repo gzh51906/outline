@@ -163,3 +163,37 @@
             * 返回一个迭代器
         * Iterator      迭代器
             * for...of : 能遍历具有迭代器的数据
+* Mobx
+```jsx
+    import React from "react";
+    import ReactDOM from "react-dom";
+
+    import { observable, action } from "mobx";// redux
+    import { observer } from "mobx-react";  // react-redux
+
+    // create State object
+    let appState = observable({ 
+        username: 'laoxie' 
+    });
+    
+    // 修改数据
+    action(function(){
+        appState.username = appState.username.toUpperCase()
+    })
+
+
+    appState.resetTimer = action(() => {
+        appState.timer = 0;
+    });
+
+    let App = function ({ appState }){
+        return (
+            <div className="App">
+                <h1>Time passed: {appState.username}</h1>
+            </div>
+        );
+    }
+
+    App = observer(App);
+
+```

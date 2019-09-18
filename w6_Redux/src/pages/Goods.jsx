@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Button} from 'antd';
 import Api from '@/api';
 import {connect} from 'react-redux'
-import {changeQty,add} from '@/redux/actions/cart'
+import {CHANGE_QTY,add,ADD_TO_CART} from '../redux/actions/cart'
 
 class Goods extends Component{
     state = {
@@ -23,9 +23,9 @@ class Goods extends Component{
         // 不存在：add_to_cart,qty=1
         let current = goodslist.filter(item=>item.goods_id === goods_id)[0];
         if(current){
-            dispatch({type:'change_qty',goods_id,qty:current.qty+1})
+            dispatch({type:CHANGE_QTY,goods_id,qty:current.qty+1})
         }else{
-            dispatch({type:'add_to_cart',payload:goods})
+            dispatch({type:ADD_TO_CART,payload:goods})
         }
 
         

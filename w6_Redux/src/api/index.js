@@ -11,6 +11,11 @@ async function get(params){
     return data;
 }
 
+async function getKucun(){
+    let {data} = await axios.get('http://localhost:1906/goods/kucun');
+    return data;
+}
+
 let post = ()=>{
     
 }
@@ -28,5 +33,6 @@ export default {
     get,
     post,
     patch,
-    delete:remove
+    delete:remove,
+    getKucun
 }
