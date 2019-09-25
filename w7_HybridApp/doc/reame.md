@@ -21,4 +21,8 @@
                 }
             }
         ```
-
+* DCloud平台
+    * 5+Runtime调用硬件API
+        > 通过window.plus
+        * Camera
+        

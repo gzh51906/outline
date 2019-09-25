@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<button type="button" class="mui-btn mui-btn-outlined btnPhoto">拍照</button>
+		<button type="button" class="mui-btn mui-btn-outlined btnVideo">录像</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				// keyEventBind:{
+				// 	backbutton:false
+				// }
+			})
+			mui.plusReady(function() {
+				let btnPhoto = document.querySelector('.btnPhoto')
+				let btnVideo = document.querySelector('.btnVideo')
+				let imgshow = document.querySelector('#imgshow')
+				// 得到cmera对象
+				let camera = plus.camera.getCamera();
+				console.log(camera)
+
+				/*
+					使用接口
+						* camera
+						* io
+						* gallery
+				*/
+				// 拍照
+				btnPhoto.onclick = function(){
+					camera.captureImage(function(path) {
+						// 把临时图片地址转成平台绝对地址
+						let realPath = plus.io.convertLocalFileSystemURL(path);
+						console.log(path, realPath)
+						imgshow.src = realPath;
+
+						// 保存到相册
+						plus.gallery.save(path, function(event) {
+							console.log('保存地址：', event.path)
+						})
+					})
+				}
+				
+				// 录像
+				btnVideo.onclick = function(){
+					camera.startVideoCapture((path)=>{
+						console.log(path);
+						
+						// 保存到相册
+						plus.gallery.save(path, function(event) {
+							console.log('保存地址：', event.path)
+						})
+					});
+					
+					
+				}
+			})
+		</script>
+	</body>
+
+</html>
