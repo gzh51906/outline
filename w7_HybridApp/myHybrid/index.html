@@ -32,6 +32,15 @@
 				</div>
 			</a>
 		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnGeolocation">
+					定位
+					<p class='mui-ellipsis'>地图、订餐、附近的人...</p>
+				</div>
+			</a>
+		</li>
 	</ul>
 	
 	<script>
@@ -44,6 +53,7 @@
 		// 扩展API加载完毕后调用onPlusReady回调函数 
 			let btnCamera = document.querySelector('#btnCamera')
 			let btnSpeech = document.querySelector('#btnSpeech')
+			let btnGeolocation = document.querySelector('#btnGeolocation')
 			
 			btnCamera.onclick = function(){
 				//创建
@@ -57,6 +67,10 @@
 			
 			btnSpeech.onclick = function(){
 				plus.webview.open('views/speech.html','page_speech')
+			}
+			
+			btnGeolocation.onclick = function(){
+				plus.webview.open('views/geolocation.html','page_geolocation')
 			}
 		}
 	</script>

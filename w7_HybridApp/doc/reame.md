@@ -25,4 +25,18 @@
     * 5+Runtime调用硬件API
         > 通过window.plus
         * Camera
-        
+
+
+## day7-4
+
+### 知识点
+* 定位
+    * geolocation（html5新特性）
+        * 获取：window.navigator.geolocation
+        * 方法
+            * getCurrentPosition(success,error,options)
+                > {coords:{longitude,latitude}}
+            * watchPosition()
+            * clearWatch() 
+            
+

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5新特性之Geolocation</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=x4RLsqK9mFnB0Vf3QiNLvSMAVmuhWqPe"></script>
+		<style>
+			html,body{height:100%;margin:0}
+			#mymap{height:100%;}
+			h1{position:absolute;top:10px;left:10px;}
+		</style>
+	</head>
+	<body>
+		<h1>HTML5新特性之Geolocation</h1>
+		<div id="mymap"></div>
+		<script src="../js/mui.js"></script>
+		<script>
+			/**
+			 * HTML5新特性之Geolocation
+			 */
+
+			// // 实例化地图
+			//  var map = new BMap.Map("mymap");
+			// //  centerAndZoom(城市,缩放级别);// 缩放级别最大：19
+			//  map.centerAndZoom('广州',18);
+			//  navigator.geolocation.getCurrentPosition((position)=>{
+			// 	console.log('position:',position)
+			// 	let {coords} = position
+			// 	map.centerAndZoom(new BMap.Point(coords.longitude,coords.latitude), 10);
+			// },(err)=>{
+			// 	console.log('err:',err)
+			// },{
+			// 	timeout:1000*30
+			// });
+
+
+			/**
+				H5+runtime Geolocation
+			*/
+			mui.init();
+			mui.plusReady(()=>{
+				var map = new BMap.Map("mymap");
+				plus.geolocation.getCurrentPosition((position)=>{
+					console.log(position);
+					let {coords} = position;
+					
+					// 根据经纬度定位当前位置
+					map.centerAndZoom(new BMap.Point(coords.longitude,coords.latitude), 19);
+					
+					//启用滚轮放大缩小，默认禁用
+					map.enableScrollWheelZoom();   
+					
+					//添加全景控件
+					// 覆盖区域图层测试
+					map.addTileLayer(new BMap.PanoramaCoverageLayer());
+
+					var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+					stCtrl.setOffset(new BMap.Size(20, 20));
+					map.addControl(stCtrl);
+				}, (err)=>{
+					console.log(err)
+				},{
+					enableHighAccuracy:true
+				});
+			})
+
+		</script>
+	</body>
+</html>
