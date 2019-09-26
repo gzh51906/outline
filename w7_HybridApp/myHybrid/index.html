@@ -41,6 +41,33 @@
 				</div>
 			</a>
 		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnContact">
+					通讯录
+					<p class='mui-ellipsis'>获取联系人，打电话，发短信...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnFingerprint">
+					指纹
+					<p class='mui-ellipsis'>支付、解锁、打开</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnShare">
+					分享
+					<p class='mui-ellipsis'>分享到朋友圈、QQ空间、微博</p>
+				</div>
+			</a>
+		</li>
 	</ul>
 	
 	<script>
@@ -54,6 +81,9 @@
 			let btnCamera = document.querySelector('#btnCamera')
 			let btnSpeech = document.querySelector('#btnSpeech')
 			let btnGeolocation = document.querySelector('#btnGeolocation')
+			let btnContact = document.querySelector('#btnContact')
+			let btnFingerprint = document.querySelector('#btnFingerprint')
+			let btnShare = document.querySelector('#btnShare')
 			
 			btnCamera.onclick = function(){
 				//创建
@@ -69,8 +99,16 @@
 				plus.webview.open('views/speech.html','page_speech')
 			}
 			
-			btnGeolocation.onclick = function(){
-				plus.webview.open('views/geolocation.html','page_geolocation')
+			btnContact.onclick = function(){
+				plus.webview.open('views/contact.html','page_contact')
+			}
+			
+			btnFingerprint.onclick = function(){
+				plus.webview.open('views/fingerprint.html','page_fingerprint')
+			}
+			
+			btnShare.onclick = function(){
+				plus.webview.open('views/share.html','page_share')
 			}
 		}
 	</script>

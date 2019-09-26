@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div>
+			<h1>
+				分享
+			</h1>
+			<div id="goods">
+				<img src="../imgs/jingjing.png"/>
+				<p class="price">价格：9.8</p>
+				<h4>不要998，也不要98，只要9快8，国庆把jingjing带回家</h4>
+			</div>
+			<button id="btnShare">分享</button>
+			<button id="btnShareSys">系统分享</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function() {
+				let btnShare = document.querySelector('#btnShare');
+				let btnShareSys = document.querySelector('#btnShareSys');
+				let goods = document.querySelector('#goods');
+				
+				btnShare.onclick = function(){
+					function sendMsg(service){
+						service.send({
+							type:'text',
+							content:goods.children[2].innerText,
+							pictures:[goods.children[0].src],
+							}, function(){
+							alert("分享成功！");
+						},function(e){
+							alert("分享失败："+e.message);
+						});
+					}
+					plus.share.getServices((services)=>{
+						console.log('services:',services);
+						var actionbuttons=services.map(item=>{
+							return {title:item.description}
+						})
+						// var actionbuttons=[{title:"不同意",style:"destructive"},{title:"1"},{title:"2"},{title:"3"}];
+						
+						var actionsheetStyle={title:"分享到",cancel:"取消",buttons:actionbuttons};
+						
+						
+						plus.nativeUI.actionSheet(actionsheetStyle, (e)=>{
+							switch(e.index){
+								case 1:
+								case 2:
+								case 3:
+									let current = services[e.index-1];
+									// 判断当前是否授权分享
+									if(!current.authenticated){
+										// 未授权时,手动授权
+										current.authorize(function(){
+											console.log("认证完成！");
+											
+											sendMsg(current)
+										}, function(e){
+											console.log("未进行认证");
+										})
+									}
+									
+									sendMsg(current)
+								break;
+							}
+						});
+					});
+				}
+			
+			
+				// 系统分享
+				btnShareSys.onclick = function(){
+					plus.share.sendWithSystem({
+							type:'type',
+							content:goods.children[2].innerText,
+							pictures:[goods.children[0].src],
+							});
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div>
+			<h1>获取手机联系人2</h1>
+			<img src="../imgs/jingjing.png"/>
+			<p class="price">价格：<span>9.92</span></p>
+			<button id="btnPay">支付</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function() {
+				let btnPay = document.querySelector('#btnPay');
+				btnPay.onclick = ()=>{
+					// 判断当前设备是否支持指纹
+					if(!plus.fingerprint.isSupport()){
+						// alert()
+						// plus.nativeUI.alert('您的设备无法购买jingjing', '支付出错');
+						return plus.nativeUI.toast('您的设备无法购买jingjing',{
+							background:'#58bc58'
+						});
+					}
+					
+					if(!plus.fingerprint.isKeyguardSecure()) {
+						plus.nativeUI.alert('此设备未设置密码锁屏，无法使用指纹识别');
+						return;
+					}
+					
+					// 判断当前设备是否录入指纹
+					if(!plus.fingerprint.isEnrolledFingerprints()){
+						return plus.nativeUI.alert('您的设备无法购买jingjing');
+					}
+					
+					plus.fingerprint.authenticate(()=>{
+						// 调转到支付成功页面
+						console.log('指纹识别成功')
+					},(e)=>{
+						console.log('err:',e);
+						switch(e.code) {
+						case e.AUTHENTICATE_MISMATCH:
+						plus.nativeUI.toast('指纹匹配失败，请重新输入');
+						break;
+						case e.AUTHENTICATE_OVERLIMIT:
+						plus.nativeUI.closeWaiting();//兼容Android平台关闭等待框
+						plus.nativeUI.alert('指纹识别失败次数超出限制，请使用其它方式进行认证');
+						break;
+						default:
+						plus.nativeUI.closeWaiting();//兼容Android平台关闭等待框
+						plus.nativeUI.alert('指纹识别失败('+e.code+')，请重试');
+						break;
+						}
+					});
+					
+					// Android平台弹出等待提示框 
+					if('Android'==plus.os.name) {
+						plus.nativeUI.showWaiting('指纹识别中...');
+					}
+					
+				}
+			})
+		</script>
+	</body>
+
+</html>

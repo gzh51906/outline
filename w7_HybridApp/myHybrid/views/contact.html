@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div>
+			<h1>获取手机联系人2</h1>
+			<ul id="contactList">
+			</ul>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui.plusReady(function() {
+				
+				// 获取手机通讯录
+				plus.contacts.getAddressBook( plus.contacts.ADDRESSBOOK_PHONE, (addressbook)=>{
+					let contactList = document.querySelector('#contactList');
+					window.dial = function(phoneNumber,username){
+						// plus.device.beep(5);//蜂鸣
+						// plus.device.vibrate(1000);//震动
+						// plus.device.dial(phoneNumber,false);//拨打电话
+						var msg = plus.messaging.createMessage(plus.messaging.TYPE_SMS);
+						msg.to = [phoneNumber];
+		
+						msg.bodyType = "text/html";
+						msg.body = '<html><body>hello '+username+'</body></html>';
+				
+						plus.messaging.sendMessage(msg, ()=>{
+							console.log('success')
+						});
+					}
+					
+					// 获取联系人列表
+					addressbook.find(["displayName","phoneNumbers"],function(contacts){
+						console.log('联系人：',contacts);
+						contactList.innerHTML = contacts.map(item=>{
+							let phoneNumber = item.phoneNumbers.map(it=>`<span onclick="dial(${it.value},'${item.displayName}')">${it.value}</span>`).join('\n')
+							return `<li><strong>${item.displayName}</strong>： ${phoneNumber}</li>`
+						}).join('\n')
+						
+					}, function () {
+						alert("error");
+					},{multiple:true});
+				}, ()=>{
+					
+				});
+				
+			})
+		</script>
+	</body>
+
+</html>
