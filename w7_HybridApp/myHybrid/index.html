@@ -68,6 +68,15 @@
 				</div>
 			</a>
 		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnPayment">
+					支付
+					<p class='mui-ellipsis'>支付宝支付、微信支付</p>
+				</div>
+			</a>
+		</li>
 	</ul>
 	
 	<script>
@@ -84,6 +93,7 @@
 			let btnContact = document.querySelector('#btnContact')
 			let btnFingerprint = document.querySelector('#btnFingerprint')
 			let btnShare = document.querySelector('#btnShare')
+			let btnPayment = document.querySelector('#btnPayment')
 			
 			btnCamera.onclick = function(){
 				//创建
@@ -109,6 +119,10 @@
 			
 			btnShare.onclick = function(){
 				plus.webview.open('views/share.html','page_share')
+			}
+			
+			btnPayment.onclick = function(){
+				plus.webview.open('views/payment.html','page_payment')
 			}
 		}
 	</script>
