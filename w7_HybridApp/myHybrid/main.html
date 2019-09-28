@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+
+</head>
+<body>
+	<h1>H5+接口调用演示</h1>
+	<ul class="mui-table-view">
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-camera"></i>
+				<div class="mui-media-body" id="btnCamera">
+					摄像头
+					<p class='mui-ellipsis'>拍照、录像、二维码...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnSpeech">
+					语音识别
+					<p class='mui-ellipsis'>语音转换文字...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnGeolocation">
+					定位
+					<p class='mui-ellipsis'>地图、订餐、附近的人...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnContact">
+					通讯录
+					<p class='mui-ellipsis'>获取联系人，打电话，发短信...</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnFingerprint">
+					指纹
+					<p class='mui-ellipsis'>支付、解锁、打开</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnShare">
+					分享
+					<p class='mui-ellipsis'>分享到朋友圈、QQ空间、微博</p>
+				</div>
+			</a>
+		</li>
+		<li class="mui-table-view-cell mui-media">
+			<a href="javascript:;">
+				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
+				<div class="mui-media-body" id="btnPayment">
+					支付
+					<p class='mui-ellipsis'>支付宝支付、微信支付</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+	
+	<script>
+		/*
+			使用接口
+				* webview
+		*/
+	   document.addEventListener( "plusready", onPlusReady, false );
+	   function onPlusReady(){console.log('plusReady')
+		// 扩展API加载完毕后调用onPlusReady回调函数 
+			let btnCamera = document.querySelector('#btnCamera')
+			let btnSpeech = document.querySelector('#btnSpeech')
+			let btnGeolocation = document.querySelector('#btnGeolocation')
+			let btnContact = document.querySelector('#btnContact')
+			let btnFingerprint = document.querySelector('#btnFingerprint')
+			let btnShare = document.querySelector('#btnShare')
+			let btnPayment = document.querySelector('#btnPayment')
+			
+			btnCamera.onclick = function(){
+				//创建
+				let pageCamera = plus.webview.create( 'views/camera.html', 'page_camera');
+				
+				// 显示创建的webview
+				plus.webview.show('page_camera','slide-in-right');
+				
+				// plus.webview.open()
+			}
+			
+			btnSpeech.onclick = function(){
+				plus.webview.open('views/speech.html','page_speech')
+			}
+			
+			btnContact.onclick = function(){
+				plus.webview.open('views/contact.html','page_contact')
+			}
+			
+			btnFingerprint.onclick = function(){
+				plus.webview.open('views/fingerprint.html','page_fingerprint')
+			}
+			
+			btnShare.onclick = function(){
+				plus.webview.open('views/share.html','page_share')
+			}
+			
+			btnPayment.onclick = function(){
+				plus.webview.open('views/payment.html','page_payment')
+			}
+		}
+	</script>
+</body>
+</html>

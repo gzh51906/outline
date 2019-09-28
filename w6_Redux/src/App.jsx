@@ -12,6 +12,9 @@ import Goods from '~/Goods';
 import Login from '~/Login'
 import Reg from '~/Reg'
 
+import img1 from './imgs/jingjing.png';console.log('jj:',img1)
+import img2 from './imgs/11.png';console.log('11:',img2)
+
 class App extends Component {
     state = {
         current: '/home',
@@ -110,6 +113,8 @@ class App extends Component {
                         <Redirect from="*" to="/notfound" />
                     </Switch>
                 </div>
+                <img src="./imgs/jingjing.png"/>
+                <img src="./imgs/11.png"/>
             </div>
         )
     }
