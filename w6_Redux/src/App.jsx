@@ -58,7 +58,9 @@ class App extends Component {
     }
 
     componentDidMount() {
-
+        document.addEventListener('plusready',function(){
+            plus.camera.getCamera()
+        })
     }
 
     render() {
