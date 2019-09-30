@@ -25,14 +25,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import HelloWord from './components/HelloWorld'
+import MyList from './components/MyList'
 
 const App: () => React$Node = () => {
   return (
     <>
       <View>
-        Hello world
+        <Text>Hello world</Text>
       </View>
       <HelloWord data="test"/>
+      <MyList/>
     </>
   );
 };

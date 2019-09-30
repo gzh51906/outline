@@ -187,7 +187,7 @@ WebPack可以看做是模块打包机：它做的事情是，分析你的项目�
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: '../dist/img/[name].[hash:7].[ext]'
+          name: 'img/[name].[hash:7].[ext]'
         }
     }
 ```
