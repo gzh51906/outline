@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#58bc58",
+    "navigationBarTitleText": "千锋h5_1906",
+    "navigationBarTextStyle": "white",
+    "backgroundColor":"#fc0",
+    "enablePullDownRefresh":true
+  },
+  "tabBar":{
+    "backgroundColor":"#58bc58",
+    "color":"#fff",
+    "selectedColor":"#ff0",
+    "position":"top",
+    "list":[{
+      "pagePath":"pages/index/index",
+      "text":"首页"
+    },{
+      "pagePath": "pages/logs/logs",
+      "text": "日志"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}
