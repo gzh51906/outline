@@ -1,10 +1,11 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function () {console.log('onLaunch')
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    
 
     // 登录
     wx.login({
@@ -33,7 +34,17 @@ App({
       }
     })
   },
+  onShow(res){
+    console.log('onShow',res);
+    
+  },
+  onHide() {
+    console.log('onHide')
+  },
   globalData: {
     userInfo: null
+  },
+  currentUser:{
+    name:'laoxie'
   }
 })

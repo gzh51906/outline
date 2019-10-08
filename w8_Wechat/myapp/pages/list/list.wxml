@@ -1,0 +1,13 @@
+<view class="container">
+  <!-- 在视图中显示数据（类似于Vue） -->
+  <text>列表{{qty}}</text>
+  <button type="primary" bindtap="changeQty">点我有惊喜</button>
+
+  <view>
+    已选中：<text wx:for="{{checkedList}}" wx:for-item="a">{{a}}, </text>
+    <checkbox-group bindchange="checkUser">
+      <checkbox wx:for="{{users}}" wx:key="*this" value="{{item}}">{{item}}</checkbox>
+    </checkbox-group>
+  </view>
+
+</view>
