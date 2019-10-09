@@ -21,3 +21,15 @@
 * 页面类型（根据跳转方式不同区分）
     * 普通页面
     * tabBar页面
+```js
+    index     sliderOffset
+        0       0
+        1       tabWidth
+        2       2*tabWidth
+    推导公式：sliderOffset = tabWidth*index
+
+    tabData = {1:[],2:[],11:[]}
+    tabData['11']
+    tabData['2'];
+
+```
