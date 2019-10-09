@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/search/search",
+    "pages/index/index",
+    "pages/player/player",
+    "pages/list/list",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#58bc58",
+    "navigationBarTitleText": "千锋音乐",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

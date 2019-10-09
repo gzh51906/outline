@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <swiper indicator-dots autoplay>
+    <swiper-item wx:for="{{recommend}}" wx:key="song_id" >
+      <image src="{{item.pic_s500}}" style="width:100%;" />
+    </swiper-item>
+  </swiper>
+</view>
+
+<!-- 搜索 -->
+<view class="weui-search-bar__form" bind:tap="gotoSearch">
+  <view class="weui-search-bar__box">
+      <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+      <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{keyword}}" />
+  </view>
+  <label class="weui-search-bar__label">
+      <icon class="weui-icon-search" type="search" size="14"></icon>
+      <view class="weui-search-bar__text">{{keyword}}</view>
+  </label>
+</view>
