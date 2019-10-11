@@ -39,5 +39,5 @@
   </view>
 </view>
 
-<template is="panel" data="{{datalist:classicSong,title:'经典老歌',type:22}}"/>
-<template is="panel" data="{{datalist:loveSong,title:'情歌对唱',type:23}}"/>
+<template is="panel" data="{{datalist:classicSong,title:'经典老歌',type:22,more:true}}"/>
+<template is="panel" data="{{datalist:loveSong,title:'情歌对唱',type:23,more:true}}"/>
