@@ -1,1 +1,1 @@
-/* pages/player/player.wxss */
+.player image{width:100%;}

@@ -77,4 +77,7 @@ page    offset
 3       10
 4       15
 推导公式：offset = (page-1)*size
+
+* audio & video
+    * 对应js接口
     

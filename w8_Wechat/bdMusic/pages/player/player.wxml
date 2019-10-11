@@ -1,2 +1,24 @@
-<!--pages/player/player.wxml-->
-<text>pages/player/player.wxml</text>
+<view class="player">
+  <image src="{{songInfo.pic_huge}}"></image>
+</view>
+<view class="weui-panel">
+    <view class="weui-panel__hd">歌曲信息</view>
+    <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+            <view class="weui-media-box__title weui-media-box__title_in-text">{{songInfo.title}}</view>
+            <view class="weui-media-box__desc">{{songInfo.si_proxycompany}}</view>
+            <view class="weui-media-box__info">
+                <view class="weui-media-box__info__meta">歌手：{{songInfo.author}}</view>
+                <view class="weui-media-box__info__meta">时间：</view>
+                <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+            </view>
+        </view>
+    </view>
+  </view>
+  <view wx:if="{{player}}">
+    <slider max="{{player.duration}}" value="100"/>
+  </view>
+  <view style="padding:50rpx 20rpx">
+    <button class="weui-btn" type="primary" plain="true" bindtap='handlePlay'>{{paused ? '播放': '暂停'}}{{player.duration}}</button>
+    <button class="weui-btn" type="primary" plain="true" bindtap='handleDownload'>歌词下载</button>
+  </view>
