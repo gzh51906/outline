@@ -80,4 +80,38 @@ page    offset
 
 * audio & video
     * 对应js接口
+
+## day8-6
+* 小程序类型
+    * 微信小程序
+    * 支付宝小程序
+    * 百度小程序
+    * 字节跳动小程序
+* 开发小程序的框架
+    > 原理：vue代码 编译成 小程序代码
+    * mpvue     基于Vue开发
+    * uni-app   基于Vue开发
+    * wePY      类似于Vue开发
+        ```js
+            //demo.wpy
+            <template>                  // .wxml
+                <div>
+                    <h1></h1>
+                </div>
+            </template>       
+            <script>                    // .js  
+                wepy.page({
+                    data: {
+                        a: 1
+                    },
+                    plus: function () {
+                        // 点击 “+“ 按钮式触发
+                        this.a++
+                    }
+                })
+            </script>                    
+            <style></style>             // .wxss
+            <config></config>           // .json
+        ```
+
     
